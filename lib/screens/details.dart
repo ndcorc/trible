@@ -5,10 +5,8 @@ import 'package:trible/providers/sort.dart';
 
 /// The details screen for either the A, B or C screen.
 class Details extends HookConsumerWidget {
-  /// Constructs a [Details].
   const Details({required this.label, super.key});
 
-  /// The label to display in the center of the screen.
   final String label;
 
   @override
