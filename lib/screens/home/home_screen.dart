@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:trible/screens/home/home_app_bar.dart';
+import 'package:trible/screens/home/home_search_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -8,15 +10,16 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
+        top: false,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // App Bar with Trible logo and location
-              AppBar(),
+              const HomeAppBar(),
 
               // Search Bar
-              _buildSearchBar(),
+              const HomeSearchBar(),
 
               // Category Tabs (Recents, Favorites, etc.)
               _buildCategoryTabs(),
@@ -28,37 +31,6 @@ class HomeScreen extends StatelessWidget {
               _buildDiscoverLocalSection(),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-
-  Widget _buildSearchBar() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Color(0xFFF2F2F2),
-          borderRadius: BorderRadius.circular(25),
-        ),
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Row(
-          children: [
-            Icon(Icons.search, color: Colors.grey),
-            SizedBox(width: 8),
-            Expanded(
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Search Trible',
-                  border: InputBorder.none,
-                  hintStyle: TextStyle(color: Colors.grey),
-                ),
-                enabled: true, // Make it a non-clickable display for now
-              ),
-            ),
-            Icon(Icons.mic, color: Colors.grey),
-          ],
         ),
       ),
     );

@@ -7,7 +7,10 @@ void main() {
     ProviderScope(
       child: MaterialApp.router(
         routerConfig: router,
-        theme: ThemeData(useMaterial3: true),
+        theme: ThemeData(
+          useMaterial3: true,
+          colorSchemeSeed: const Color.fromARGB(255, 105, 133, 132),
+        ),
       ),
     ),
   );

@@ -8,34 +8,32 @@ class HomeAppBar extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            children: [
-              SizedBox(
-                height: 30,
-                child: Image.asset(
-                  'assets/trible_logo.png',
-                  // If you don't have this asset, replace with a placeholder icon or text
-                  errorBuilder:
-                      (context, error, stackTrace) => const Row(
-                        children: [
-                          Icon(Icons.pets, color: Color(0xFF7BA7B1), size: 20),
-                          Text(
-                            'Trible',
-                            style: TextStyle(
-                              color: Color(0xFF7BA7B1),
-                              fontSize: 24,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
+          SizedBox(
+            height: 42,
+            child: Image.asset(
+              'assets/trible_logo.png',
+              // If you don't have this asset, replace with a placeholder icon or text
+              errorBuilder:
+                  (context, error, stackTrace) => const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(Icons.people, color: Color(0xFFF3C154), size: 38),
+                      Text(
+                        'Tryble',
+                        style: TextStyle(
+                          color: Color(0xFF7BA7B1),
+                          fontSize: 32,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                ),
-              ),
-            ],
+                    ],
+                  ),
+            ),
           ),
-          const Row(
+          /* const Row(
             children: [
               Icon(Icons.location_on, color: Color(0xFF7BA7B1), size: 15),
               Text(
@@ -53,7 +51,7 @@ class HomeAppBar extends StatelessWidget {
               ),
               Text('78626', style: TextStyle(color: Colors.grey, fontSize: 12)),
             ],
-          ),
+          ), */
         ],
       ),
     );
