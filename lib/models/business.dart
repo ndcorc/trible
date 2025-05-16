@@ -9,10 +9,11 @@ abstract class Business with _$Business {
   factory Business({
     required String id,
     required String name,
-    required String description,
+    required String tagline,
     required String imageUrl,
     required String distance,
     required String category,
   }) = _Business;
-    factory Business.fromJson(Map<String, Object?> json) => _$BusinessFromJson(json);
+  factory Business.fromJson(Map<String, Object?> json) =>
+      _$BusinessFromJson(json);
 }

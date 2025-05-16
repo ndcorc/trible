@@ -20,6 +20,7 @@ class TodosRepository {
 
   Future<List<Todo>> getTodoList() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
     try {
       final List<Map<String, dynamic>> todosJsonList =
           List<Map<String, dynamic>>.from(

@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trible/models/business_category.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -11,17 +9,19 @@ part 'business_categories.g.dart';
 BusinessCategoriesRepository businessCategoriesRepo(ref) =>
     BusinessCategoriesRepository();
 
-final _businessListKey = 'businessListKey';
+final _businessCategoryListKey = 'businessCategoryListKey';
 
 class BusinessCategoriesRepository {
   BusinessCategoriesRepository();
 
   Future<List<BusinessCategory>> getBusinessCategoryList() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    await prefs.clear();
     try {
       final List<Map<String, dynamic>> businessCategoriesJsonList =
           List<Map<String, dynamic>>.from(
-            jsonDecode(prefs.getString(_businessListKey) ?? '[]'),
+            jsonDecode(prefs.getString(_businessCategoryListKey) ?? '[]'),
           );
       if (businessCategoriesJsonList.isEmpty) {
         await saveBusinessCategoryList(defaultBusinessCategories);
@@ -41,7 +41,7 @@ class BusinessCategoriesRepository {
   ) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(
-      _businessListKey,
+      _businessCategoryListKey,
       jsonEncode(businessList.map((business) => business.toJson()).toList()),
     );
   }
@@ -51,47 +51,47 @@ List<BusinessCategory> defaultBusinessCategories = [
   BusinessCategory(
     title: 'Brewery',
     distance: '0.5 Miles',
-    imageUrl: 'assets/brewery.jpg',
+    imageUrl: 'assets/images/brewery.png',
   ),
   BusinessCategory(
     title: 'Barber',
     distance: '1.2 Miles',
-    imageUrl: 'assets/barber.jpg',
+    imageUrl: 'assets/images/barber.png',
   ),
   BusinessCategory(
     title: 'Automotive',
     distance: '2.7 Miles',
-    imageUrl: 'assets/automotive.jpg',
+    imageUrl: 'assets/images/automotive.png',
   ),
   BusinessCategory(
     title: 'Photography',
     distance: '3.1 Miles',
-    imageUrl: 'assets/photography.jpg',
+    imageUrl: 'assets/images/photography.png',
   ),
   BusinessCategory(
     title: 'Bakery',
     distance: '0.3 Miles',
-    imageUrl: 'assets/bakery.jpg',
+    imageUrl: 'assets/images/bakery.png',
   ),
   BusinessCategory(
     title: 'Hardware',
     distance: '3.5 Miles',
-    imageUrl: 'assets/hardware.jpg',
+    imageUrl: 'assets/images/hardware.png',
   ),
   BusinessCategory(
     title: 'Home',
     distance: '2.5 Miles',
-    imageUrl: 'assets/home.jpg',
+    imageUrl: 'assets/images/home.png',
   ),
   BusinessCategory(
     title: 'Paint',
     distance: '6.8 Miles',
-    imageUrl: 'assets/paint.jpg',
+    imageUrl: 'assets/images/paint.png',
   ),
   BusinessCategory(
     title: 'Landscaping',
     distance: '4.3 Miles',
-    imageUrl: 'assets/landscaping.jpg',
+    imageUrl: 'assets/images/landscaping.png',
   ),
   // Add more businessCategories as needed
 ];

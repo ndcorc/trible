@@ -9,7 +9,7 @@ part of 'business.dart';
 _Business _$BusinessFromJson(Map<String, dynamic> json) => _Business(
   id: json['id'] as String,
   name: json['name'] as String,
-  description: json['description'] as String,
+  tagline: json['tagline'] as String,
   imageUrl: json['imageUrl'] as String,
   distance: json['distance'] as String,
   category: json['category'] as String,
@@ -18,7 +18,7 @@ _Business _$BusinessFromJson(Map<String, dynamic> json) => _Business(
 Map<String, dynamic> _$BusinessToJson(_Business instance) => <String, dynamic>{
   'id': instance.id,
   'name': instance.name,
-  'description': instance.description,
+  'tagline': instance.tagline,
   'imageUrl': instance.imageUrl,
   'distance': instance.distance,
   'category': instance.category,

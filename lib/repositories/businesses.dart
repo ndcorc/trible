@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trible/models/business.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -40,32 +38,49 @@ class BusinessesRepository {
       jsonEncode(businessList.map((business) => business.toJson()).toList()),
     );
   }
+
+  // New method: getBusinessById
+  Future<Business> getBusinessById(String id) async {
+    final businessList = await getBusinessList();
+    return businessList.firstWhere(
+      (business) => business.id == id,
+      orElse: () => throw Exception('Business not found for id $id'),
+    );
+  }
 }
 
 List<Business> defaultBusinesses = [
   Business(
     id: '1',
     name: 'Woodchuck Delivery',
-    description: '\$15 off wood delivery until 1/1',
-    imageUrl: 'assets/wood_delivery.jpg',
+    tagline: 'The wood is good.',
+    imageUrl: 'assets/images/wood_delivery.png',
     distance: '1.5 miles',
     category: 'Services',
   ),
   Business(
     id: '2',
     name: 'Anthem Botique',
-    description: '\$25 off with purchase of \$50 or more',
-    imageUrl: 'assets/boutique.jpg',
+    tagline: 'Style With A Purpose',
+    imageUrl: 'assets/images/anthem_boutique.png',
     distance: '0.8 miles',
     category: 'Shopping',
   ),
   Business(
     id: '3',
-    name: 'Harvest Bakery',
-    description: 'Kids Under 10 Eat Free, 1/5',
-    imageUrl: 'assets/burger.jpg',
+    name: 'Blue Corn Harvest',
+    tagline: 'Authentic Southwestern cuisine',
+    imageUrl: 'assets/images/blue_corn_harvest.png',
     distance: '2.1 miles',
     category: 'Food',
+  ),
+  Business(
+    id: '4',
+    name: 'Georgetown Barbershop',
+    tagline: 'Just simple old-fashioned haircuts and shaves!',
+    imageUrl: 'assets/images/georgetown_barbershop.png',
+    distance: '2.1 miles',
+    category: 'Barber',
   ),
   // Add more businesses as needed
 ];

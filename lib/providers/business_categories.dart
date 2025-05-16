@@ -7,8 +7,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'business_categories.g.dart';
 
 @riverpod
-class BusinessCategoryCategories extends _$BusinessCategoryCategories {
-  Future<List<BusinessCategory>> _fetchBusinessCategoryCategories() async {
+class BusinessCategories extends _$BusinessCategories {
+  Future<List<BusinessCategory>> _fetchBusinessCategories() async {
     return await ref
         .watch(businessCategoriesRepoProvider)
         .getBusinessCategoryList();
@@ -16,7 +16,7 @@ class BusinessCategoryCategories extends _$BusinessCategoryCategories {
 
   @override
   Future<List<BusinessCategory>> build() async {
-    final businessCategories = await _fetchBusinessCategoryCategories();
+    final businessCategories = await _fetchBusinessCategories();
     //final filter = ref.watch(filterProvider);
     final sort = ref.watch(sortProvider);
 
@@ -36,30 +36,30 @@ class BusinessCategoryCategories extends _$BusinessCategoryCategories {
     };
   }
 
-  // Let's allow the UI to add BusinessCategoryCategories.
+  // Let's allow the UI to add BusinessCategories.
   Future<void> addBusinessCategory(BusinessCategory business) async {
     state = const AsyncValue.loading();
-    final newBusinessCategoryCategories = [...?state.value, business];
+    final newBusinessCategories = [...?state.value, business];
     state = await AsyncValue.guard(() async {
       await ref
           .watch(businessCategoriesRepoProvider)
-          .saveBusinessCategoryList(newBusinessCategoryCategories);
-      return _fetchBusinessCategoryCategories();
+          .saveBusinessCategoryList(newBusinessCategories);
+      return _fetchBusinessCategories();
     });
   }
 
-  // Let's allow removing BusinessCategoryCategories
+  // Let's allow removing BusinessCategories
   Future<void> removeBusinessCategory(String categoryTitle) async {
     state = const AsyncValue.loading();
-    final newBusinessCategoryCategories = [
+    final newBusinessCategories = [
       for (final businessCategory in state.value!)
         if (businessCategory.title != categoryTitle) businessCategory,
     ];
     state = await AsyncValue.guard(() async {
       await ref
           .watch(businessCategoriesRepoProvider)
-          .saveBusinessCategoryList(newBusinessCategoryCategories);
-      return _fetchBusinessCategoryCategories();
+          .saveBusinessCategoryList(newBusinessCategories);
+      return _fetchBusinessCategories();
     });
   }
 }
@@ -70,4 +70,4 @@ class BusinessCategoryCategories extends _$BusinessCategoryCategories {
 // no public getters/properties!
 // The public methods on this class will be what allow the UI to modify the state.
 // Finally, we are using businessCategoriesProvider(NotifierProvider) to allow the UI to
-// interact with our BusinessCategoryCategories class.
+// interact with our BusinessCategories class.

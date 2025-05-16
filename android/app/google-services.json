@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "544256515378",
+    "project_id": "trible-bfeaf",
+    "storage_bucket": "trible-bfeaf.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:544256515378:android:23d21224550dbaef3dcb2b",
+        "android_client_info": {
+          "package_name": "com.example.myapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCguo74jesv3DhVAD9GS31xkVVhytbl2mA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

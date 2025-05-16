@@ -17,47 +17,47 @@ class AppTabBar extends HookConsumerWidget {
       context: context,
       removeBottom: true,
       removeTop: true,
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 10.0),
-        child: NavigationBar(
-          elevation: 2,
-          labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-          selectedIndex: currentPageIndex.value,
-          height: 80,
-          onDestinationSelected: (int index) {
-            currentPageIndex.value = index;
-            switch (index) {
-              case 0:
-                context.go('/');
-                break;
-              case 1:
-                context.go('/todo');
-                break;
-              case 2:
-                context.go('/details');
-                break;
-              case 3:
-                context.go('/notifications');
-                break;
-              case 4:
-                context.go('/settings');
-                break;
-            }
-          },
-          destinations: const [
-            NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-            NavigationDestination(icon: Icon(Icons.search), label: 'Search'),
-            NavigationDestination(icon: Icon(Icons.add), label: 'Add'),
-            NavigationDestination(
-              icon: Icon(Icons.notifications),
-              label: 'Notifications',
+      child: NavigationBar(
+        elevation: 2,
+        labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+        selectedIndex: currentPageIndex.value,
+        height: 90,
+        onDestinationSelected: (int index) {
+          currentPageIndex.value = index;
+          switch (index) {
+            case 0:
+              context.go('/');
+              break;
+            case 1:
+              context.go('/search');
+              break;
+            case 2:
+              context.go('/bulletin');
+              break;
+            case 3:
+              context.go('/cart');
+              break;
+            case 4:
+              context.go('/settings');
+              break;
+          }
+        },
+        destinations: const [
+          NavigationDestination(
+            icon: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(Icons.home),
             ),
-            NavigationDestination(
-              icon: Icon(Icons.settings),
-              label: 'Settings',
-            ),
-          ],
-        ),
+            label: 'Home',
+          ),
+          NavigationDestination(icon: Icon(Icons.search), label: 'Search'),
+          NavigationDestination(
+            icon: Icon(Icons.view_agenda_outlined),
+            label: 'Bulletin',
+          ),
+          NavigationDestination(icon: Icon(Icons.shopping_cart), label: 'Cart'),
+          NavigationDestination(icon: Icon(Icons.settings), label: 'Settings'),
+        ],
       ),
     );
   }
