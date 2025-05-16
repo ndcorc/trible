@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:trible/models/promotion.dart';
@@ -22,10 +23,22 @@ class PromotionScreen extends HookConsumerWidget {
                 height: double.infinity,
                 width: double.infinity,
                 child:
-                    promotion.business?.imageUrl != null
-                        ? Image.asset(
-                          promotion.business?.imageUrl ?? "",
+                    promotion.business?.coverImageUrl != null
+                        ? CachedNetworkImage(
+                          imageUrl: promotion.business?.coverImageUrl ?? "",
                           fit: BoxFit.cover,
+                          placeholder:
+                              (context, url) => Container(
+                                color: Colors.grey[300],
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ),
+                          errorWidget:
+                              (context, url, error) => Container(
+                                color: Colors.grey[300],
+                                child: Icon(Icons.error),
+                              ),
                         )
                         : Container(color: Colors.grey[300]),
               ),
@@ -120,17 +133,15 @@ class PromotionScreen extends HookConsumerWidget {
                                       CircleAvatar(
                                         radius: 30,
                                         backgroundImage:
-                                            promotion.business?.imageUrl != null
-                                                ? AssetImage(
-                                                  promotion
-                                                          .business
-                                                          ?.imageUrl ??
+                                            promotion.business?.logoUrl != null
+                                                ? NetworkImage(
+                                                  promotion.business?.logoUrl ??
                                                       "",
                                                 )
                                                 : null,
                                         backgroundColor: Colors.grey[200],
                                         child:
-                                            promotion.business?.imageUrl == null
+                                            promotion.business?.logoUrl == null
                                                 ? Text(
                                                   promotion.business?.name
                                                           ?.substring(0, 1) ??

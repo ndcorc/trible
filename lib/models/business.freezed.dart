@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Business implements DiagnosticableTreeMixin {
 
- String get id; String get name; String get tagline; String get imageUrl; String get distance; String get category;
+ String get id; String get name; String get tagline; String get logoUrl; String get coverImageUrl; String get checkInInstructions; bool get isActive; BusinessLocation get location; int get phone; String get redeemPolicy; int get waitlistInterestScore; String get website;@DocumentReferenceConverter() DocumentReference? get owner;@DocumentReferenceConverter() DocumentReference? get category;@TimestampConverter() Timestamp get joinedAt;
 /// Create a copy of Business
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,21 +30,21 @@ $BusinessCopyWith<Business> get copyWith => _$BusinessCopyWithImpl<Business>(thi
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'Business'))
-    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('name', name))..add(DiagnosticsProperty('tagline', tagline))..add(DiagnosticsProperty('imageUrl', imageUrl))..add(DiagnosticsProperty('distance', distance))..add(DiagnosticsProperty('category', category));
+    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('name', name))..add(DiagnosticsProperty('tagline', tagline))..add(DiagnosticsProperty('logoUrl', logoUrl))..add(DiagnosticsProperty('coverImageUrl', coverImageUrl))..add(DiagnosticsProperty('checkInInstructions', checkInInstructions))..add(DiagnosticsProperty('isActive', isActive))..add(DiagnosticsProperty('location', location))..add(DiagnosticsProperty('phone', phone))..add(DiagnosticsProperty('redeemPolicy', redeemPolicy))..add(DiagnosticsProperty('waitlistInterestScore', waitlistInterestScore))..add(DiagnosticsProperty('website', website))..add(DiagnosticsProperty('owner', owner))..add(DiagnosticsProperty('category', category))..add(DiagnosticsProperty('joinedAt', joinedAt));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Business&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.tagline, tagline) || other.tagline == tagline)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.distance, distance) || other.distance == distance)&&(identical(other.category, category) || other.category == category));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Business&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.tagline, tagline) || other.tagline == tagline)&&(identical(other.logoUrl, logoUrl) || other.logoUrl == logoUrl)&&(identical(other.coverImageUrl, coverImageUrl) || other.coverImageUrl == coverImageUrl)&&(identical(other.checkInInstructions, checkInInstructions) || other.checkInInstructions == checkInInstructions)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.location, location) || other.location == location)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.redeemPolicy, redeemPolicy) || other.redeemPolicy == redeemPolicy)&&(identical(other.waitlistInterestScore, waitlistInterestScore) || other.waitlistInterestScore == waitlistInterestScore)&&(identical(other.website, website) || other.website == website)&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.category, category) || other.category == category)&&(identical(other.joinedAt, joinedAt) || other.joinedAt == joinedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,tagline,imageUrl,distance,category);
+int get hashCode => Object.hash(runtimeType,id,name,tagline,logoUrl,coverImageUrl,checkInInstructions,isActive,location,phone,redeemPolicy,waitlistInterestScore,website,owner,category,joinedAt);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'Business(id: $id, name: $name, tagline: $tagline, imageUrl: $imageUrl, distance: $distance, category: $category)';
+  return 'Business(id: $id, name: $name, tagline: $tagline, logoUrl: $logoUrl, coverImageUrl: $coverImageUrl, checkInInstructions: $checkInInstructions, isActive: $isActive, location: $location, phone: $phone, redeemPolicy: $redeemPolicy, waitlistInterestScore: $waitlistInterestScore, website: $website, owner: $owner, category: $category, joinedAt: $joinedAt)';
 }
 
 
@@ -55,11 +55,11 @@ abstract mixin class $BusinessCopyWith<$Res>  {
   factory $BusinessCopyWith(Business value, $Res Function(Business) _then) = _$BusinessCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, String tagline, String imageUrl, String distance, String category
+ String id, String name, String tagline, String logoUrl, String coverImageUrl, String checkInInstructions, bool isActive, BusinessLocation location, int phone, String redeemPolicy, int waitlistInterestScore, String website,@DocumentReferenceConverter() DocumentReference? owner,@DocumentReferenceConverter() DocumentReference? category,@TimestampConverter() Timestamp joinedAt
 });
 
 
-
+$BusinessLocationCopyWith<$Res> get location;
 
 }
 /// @nodoc
@@ -72,18 +72,36 @@ class _$BusinessCopyWithImpl<$Res>
 
 /// Create a copy of Business
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? tagline = null,Object? imageUrl = null,Object? distance = null,Object? category = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? tagline = null,Object? logoUrl = null,Object? coverImageUrl = null,Object? checkInInstructions = null,Object? isActive = null,Object? location = null,Object? phone = null,Object? redeemPolicy = null,Object? waitlistInterestScore = null,Object? website = null,Object? owner = freezed,Object? category = freezed,Object? joinedAt = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,tagline: null == tagline ? _self.tagline : tagline // ignore: cast_nullable_to_non_nullable
-as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
-as String,distance: null == distance ? _self.distance : distance // ignore: cast_nullable_to_non_nullable
-as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
-as String,
+as String,logoUrl: null == logoUrl ? _self.logoUrl : logoUrl // ignore: cast_nullable_to_non_nullable
+as String,coverImageUrl: null == coverImageUrl ? _self.coverImageUrl : coverImageUrl // ignore: cast_nullable_to_non_nullable
+as String,checkInInstructions: null == checkInInstructions ? _self.checkInInstructions : checkInInstructions // ignore: cast_nullable_to_non_nullable
+as String,isActive: null == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
+as bool,location: null == location ? _self.location : location // ignore: cast_nullable_to_non_nullable
+as BusinessLocation,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as int,redeemPolicy: null == redeemPolicy ? _self.redeemPolicy : redeemPolicy // ignore: cast_nullable_to_non_nullable
+as String,waitlistInterestScore: null == waitlistInterestScore ? _self.waitlistInterestScore : waitlistInterestScore // ignore: cast_nullable_to_non_nullable
+as int,website: null == website ? _self.website : website // ignore: cast_nullable_to_non_nullable
+as String,owner: freezed == owner ? _self.owner : owner // ignore: cast_nullable_to_non_nullable
+as DocumentReference?,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
+as DocumentReference?,joinedAt: null == joinedAt ? _self.joinedAt : joinedAt // ignore: cast_nullable_to_non_nullable
+as Timestamp,
   ));
 }
-
+/// Create a copy of Business
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$BusinessLocationCopyWith<$Res> get location {
+  
+  return $BusinessLocationCopyWith<$Res>(_self.location, (value) {
+    return _then(_self.copyWith(location: value));
+  });
+}
 }
 
 
@@ -91,15 +109,24 @@ as String,
 @JsonSerializable()
 
 class _Business with DiagnosticableTreeMixin implements Business {
-   _Business({required this.id, required this.name, required this.tagline, required this.imageUrl, required this.distance, required this.category});
+   _Business({required this.id, required this.name, required this.tagline, required this.logoUrl, required this.coverImageUrl, required this.checkInInstructions, required this.isActive, required this.location, required this.phone, required this.redeemPolicy, required this.waitlistInterestScore, required this.website, @DocumentReferenceConverter() this.owner, @DocumentReferenceConverter() this.category, @TimestampConverter() required this.joinedAt});
   factory _Business.fromJson(Map<String, dynamic> json) => _$BusinessFromJson(json);
 
 @override final  String id;
 @override final  String name;
 @override final  String tagline;
-@override final  String imageUrl;
-@override final  String distance;
-@override final  String category;
+@override final  String logoUrl;
+@override final  String coverImageUrl;
+@override final  String checkInInstructions;
+@override final  bool isActive;
+@override final  BusinessLocation location;
+@override final  int phone;
+@override final  String redeemPolicy;
+@override final  int waitlistInterestScore;
+@override final  String website;
+@override@DocumentReferenceConverter() final  DocumentReference? owner;
+@override@DocumentReferenceConverter() final  DocumentReference? category;
+@override@TimestampConverter() final  Timestamp joinedAt;
 
 /// Create a copy of Business
 /// with the given fields replaced by the non-null parameter values.
@@ -115,21 +142,21 @@ Map<String, dynamic> toJson() {
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'Business'))
-    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('name', name))..add(DiagnosticsProperty('tagline', tagline))..add(DiagnosticsProperty('imageUrl', imageUrl))..add(DiagnosticsProperty('distance', distance))..add(DiagnosticsProperty('category', category));
+    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('name', name))..add(DiagnosticsProperty('tagline', tagline))..add(DiagnosticsProperty('logoUrl', logoUrl))..add(DiagnosticsProperty('coverImageUrl', coverImageUrl))..add(DiagnosticsProperty('checkInInstructions', checkInInstructions))..add(DiagnosticsProperty('isActive', isActive))..add(DiagnosticsProperty('location', location))..add(DiagnosticsProperty('phone', phone))..add(DiagnosticsProperty('redeemPolicy', redeemPolicy))..add(DiagnosticsProperty('waitlistInterestScore', waitlistInterestScore))..add(DiagnosticsProperty('website', website))..add(DiagnosticsProperty('owner', owner))..add(DiagnosticsProperty('category', category))..add(DiagnosticsProperty('joinedAt', joinedAt));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Business&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.tagline, tagline) || other.tagline == tagline)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.distance, distance) || other.distance == distance)&&(identical(other.category, category) || other.category == category));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Business&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.tagline, tagline) || other.tagline == tagline)&&(identical(other.logoUrl, logoUrl) || other.logoUrl == logoUrl)&&(identical(other.coverImageUrl, coverImageUrl) || other.coverImageUrl == coverImageUrl)&&(identical(other.checkInInstructions, checkInInstructions) || other.checkInInstructions == checkInInstructions)&&(identical(other.isActive, isActive) || other.isActive == isActive)&&(identical(other.location, location) || other.location == location)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.redeemPolicy, redeemPolicy) || other.redeemPolicy == redeemPolicy)&&(identical(other.waitlistInterestScore, waitlistInterestScore) || other.waitlistInterestScore == waitlistInterestScore)&&(identical(other.website, website) || other.website == website)&&(identical(other.owner, owner) || other.owner == owner)&&(identical(other.category, category) || other.category == category)&&(identical(other.joinedAt, joinedAt) || other.joinedAt == joinedAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,tagline,imageUrl,distance,category);
+int get hashCode => Object.hash(runtimeType,id,name,tagline,logoUrl,coverImageUrl,checkInInstructions,isActive,location,phone,redeemPolicy,waitlistInterestScore,website,owner,category,joinedAt);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'Business(id: $id, name: $name, tagline: $tagline, imageUrl: $imageUrl, distance: $distance, category: $category)';
+  return 'Business(id: $id, name: $name, tagline: $tagline, logoUrl: $logoUrl, coverImageUrl: $coverImageUrl, checkInInstructions: $checkInInstructions, isActive: $isActive, location: $location, phone: $phone, redeemPolicy: $redeemPolicy, waitlistInterestScore: $waitlistInterestScore, website: $website, owner: $owner, category: $category, joinedAt: $joinedAt)';
 }
 
 
@@ -140,11 +167,11 @@ abstract mixin class _$BusinessCopyWith<$Res> implements $BusinessCopyWith<$Res>
   factory _$BusinessCopyWith(_Business value, $Res Function(_Business) _then) = __$BusinessCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, String tagline, String imageUrl, String distance, String category
+ String id, String name, String tagline, String logoUrl, String coverImageUrl, String checkInInstructions, bool isActive, BusinessLocation location, int phone, String redeemPolicy, int waitlistInterestScore, String website,@DocumentReferenceConverter() DocumentReference? owner,@DocumentReferenceConverter() DocumentReference? category,@TimestampConverter() Timestamp joinedAt
 });
 
 
-
+@override $BusinessLocationCopyWith<$Res> get location;
 
 }
 /// @nodoc
@@ -157,15 +184,197 @@ class __$BusinessCopyWithImpl<$Res>
 
 /// Create a copy of Business
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? tagline = null,Object? imageUrl = null,Object? distance = null,Object? category = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? tagline = null,Object? logoUrl = null,Object? coverImageUrl = null,Object? checkInInstructions = null,Object? isActive = null,Object? location = null,Object? phone = null,Object? redeemPolicy = null,Object? waitlistInterestScore = null,Object? website = null,Object? owner = freezed,Object? category = freezed,Object? joinedAt = null,}) {
   return _then(_Business(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,tagline: null == tagline ? _self.tagline : tagline // ignore: cast_nullable_to_non_nullable
-as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
-as String,distance: null == distance ? _self.distance : distance // ignore: cast_nullable_to_non_nullable
-as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
-as String,
+as String,logoUrl: null == logoUrl ? _self.logoUrl : logoUrl // ignore: cast_nullable_to_non_nullable
+as String,coverImageUrl: null == coverImageUrl ? _self.coverImageUrl : coverImageUrl // ignore: cast_nullable_to_non_nullable
+as String,checkInInstructions: null == checkInInstructions ? _self.checkInInstructions : checkInInstructions // ignore: cast_nullable_to_non_nullable
+as String,isActive: null == isActive ? _self.isActive : isActive // ignore: cast_nullable_to_non_nullable
+as bool,location: null == location ? _self.location : location // ignore: cast_nullable_to_non_nullable
+as BusinessLocation,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as int,redeemPolicy: null == redeemPolicy ? _self.redeemPolicy : redeemPolicy // ignore: cast_nullable_to_non_nullable
+as String,waitlistInterestScore: null == waitlistInterestScore ? _self.waitlistInterestScore : waitlistInterestScore // ignore: cast_nullable_to_non_nullable
+as int,website: null == website ? _self.website : website // ignore: cast_nullable_to_non_nullable
+as String,owner: freezed == owner ? _self.owner : owner // ignore: cast_nullable_to_non_nullable
+as DocumentReference?,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
+as DocumentReference?,joinedAt: null == joinedAt ? _self.joinedAt : joinedAt // ignore: cast_nullable_to_non_nullable
+as Timestamp,
+  ));
+}
+
+/// Create a copy of Business
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$BusinessLocationCopyWith<$Res> get location {
+  
+  return $BusinessLocationCopyWith<$Res>(_self.location, (value) {
+    return _then(_self.copyWith(location: value));
+  });
+}
+}
+
+
+/// @nodoc
+mixin _$BusinessLocation implements DiagnosticableTreeMixin {
+
+ String get address; String get city; String get state;// Add the GeoPoint field
+@GeoPointConverter() GeoPoint get geoPoint;// Keep lat/lon for convenience but make them computed getters
+@JsonKey(includeFromJson: false, includeToJson: false) double? get lat;@JsonKey(includeFromJson: false, includeToJson: false) double? get lon;
+/// Create a copy of BusinessLocation
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$BusinessLocationCopyWith<BusinessLocation> get copyWith => _$BusinessLocationCopyWithImpl<BusinessLocation>(this as BusinessLocation, _$identity);
+
+  /// Serializes this BusinessLocation to a JSON map.
+  Map<String, dynamic> toJson();
+
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'BusinessLocation'))
+    ..add(DiagnosticsProperty('address', address))..add(DiagnosticsProperty('city', city))..add(DiagnosticsProperty('state', state))..add(DiagnosticsProperty('geoPoint', geoPoint))..add(DiagnosticsProperty('lat', lat))..add(DiagnosticsProperty('lon', lon));
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BusinessLocation&&(identical(other.address, address) || other.address == address)&&(identical(other.city, city) || other.city == city)&&(identical(other.state, state) || other.state == state)&&(identical(other.geoPoint, geoPoint) || other.geoPoint == geoPoint)&&(identical(other.lat, lat) || other.lat == lat)&&(identical(other.lon, lon) || other.lon == lon));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,address,city,state,geoPoint,lat,lon);
+
+@override
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'BusinessLocation(address: $address, city: $city, state: $state, geoPoint: $geoPoint, lat: $lat, lon: $lon)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $BusinessLocationCopyWith<$Res>  {
+  factory $BusinessLocationCopyWith(BusinessLocation value, $Res Function(BusinessLocation) _then) = _$BusinessLocationCopyWithImpl;
+@useResult
+$Res call({
+ String address, String city, String state,@GeoPointConverter() GeoPoint geoPoint,@JsonKey(includeFromJson: false, includeToJson: false) double? lat,@JsonKey(includeFromJson: false, includeToJson: false) double? lon
+});
+
+
+
+
+}
+/// @nodoc
+class _$BusinessLocationCopyWithImpl<$Res>
+    implements $BusinessLocationCopyWith<$Res> {
+  _$BusinessLocationCopyWithImpl(this._self, this._then);
+
+  final BusinessLocation _self;
+  final $Res Function(BusinessLocation) _then;
+
+/// Create a copy of BusinessLocation
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? address = null,Object? city = null,Object? state = null,Object? geoPoint = null,Object? lat = freezed,Object? lon = freezed,}) {
+  return _then(_self.copyWith(
+address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as String,city: null == city ? _self.city : city // ignore: cast_nullable_to_non_nullable
+as String,state: null == state ? _self.state : state // ignore: cast_nullable_to_non_nullable
+as String,geoPoint: null == geoPoint ? _self.geoPoint : geoPoint // ignore: cast_nullable_to_non_nullable
+as GeoPoint,lat: freezed == lat ? _self.lat : lat // ignore: cast_nullable_to_non_nullable
+as double?,lon: freezed == lon ? _self.lon : lon // ignore: cast_nullable_to_non_nullable
+as double?,
+  ));
+}
+
+}
+
+
+/// @nodoc
+@JsonSerializable()
+
+class _BusinessLocation with DiagnosticableTreeMixin implements BusinessLocation {
+   _BusinessLocation({required this.address, required this.city, required this.state, @GeoPointConverter() required this.geoPoint, @JsonKey(includeFromJson: false, includeToJson: false) this.lat, @JsonKey(includeFromJson: false, includeToJson: false) this.lon});
+  factory _BusinessLocation.fromJson(Map<String, dynamic> json) => _$BusinessLocationFromJson(json);
+
+@override final  String address;
+@override final  String city;
+@override final  String state;
+// Add the GeoPoint field
+@override@GeoPointConverter() final  GeoPoint geoPoint;
+// Keep lat/lon for convenience but make them computed getters
+@override@JsonKey(includeFromJson: false, includeToJson: false) final  double? lat;
+@override@JsonKey(includeFromJson: false, includeToJson: false) final  double? lon;
+
+/// Create a copy of BusinessLocation
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$BusinessLocationCopyWith<_BusinessLocation> get copyWith => __$BusinessLocationCopyWithImpl<_BusinessLocation>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$BusinessLocationToJson(this, );
+}
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'BusinessLocation'))
+    ..add(DiagnosticsProperty('address', address))..add(DiagnosticsProperty('city', city))..add(DiagnosticsProperty('state', state))..add(DiagnosticsProperty('geoPoint', geoPoint))..add(DiagnosticsProperty('lat', lat))..add(DiagnosticsProperty('lon', lon));
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BusinessLocation&&(identical(other.address, address) || other.address == address)&&(identical(other.city, city) || other.city == city)&&(identical(other.state, state) || other.state == state)&&(identical(other.geoPoint, geoPoint) || other.geoPoint == geoPoint)&&(identical(other.lat, lat) || other.lat == lat)&&(identical(other.lon, lon) || other.lon == lon));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,address,city,state,geoPoint,lat,lon);
+
+@override
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'BusinessLocation(address: $address, city: $city, state: $state, geoPoint: $geoPoint, lat: $lat, lon: $lon)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$BusinessLocationCopyWith<$Res> implements $BusinessLocationCopyWith<$Res> {
+  factory _$BusinessLocationCopyWith(_BusinessLocation value, $Res Function(_BusinessLocation) _then) = __$BusinessLocationCopyWithImpl;
+@override @useResult
+$Res call({
+ String address, String city, String state,@GeoPointConverter() GeoPoint geoPoint,@JsonKey(includeFromJson: false, includeToJson: false) double? lat,@JsonKey(includeFromJson: false, includeToJson: false) double? lon
+});
+
+
+
+
+}
+/// @nodoc
+class __$BusinessLocationCopyWithImpl<$Res>
+    implements _$BusinessLocationCopyWith<$Res> {
+  __$BusinessLocationCopyWithImpl(this._self, this._then);
+
+  final _BusinessLocation _self;
+  final $Res Function(_BusinessLocation) _then;
+
+/// Create a copy of BusinessLocation
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? address = null,Object? city = null,Object? state = null,Object? geoPoint = null,Object? lat = freezed,Object? lon = freezed,}) {
+  return _then(_BusinessLocation(
+address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as String,city: null == city ? _self.city : city // ignore: cast_nullable_to_non_nullable
+as String,state: null == state ? _self.state : state // ignore: cast_nullable_to_non_nullable
+as String,geoPoint: null == geoPoint ? _self.geoPoint : geoPoint // ignore: cast_nullable_to_non_nullable
+as GeoPoint,lat: freezed == lat ? _self.lat : lat // ignore: cast_nullable_to_non_nullable
+as double?,lon: freezed == lon ? _self.lon : lon // ignore: cast_nullable_to_non_nullable
+as double?,
   ));
 }
 

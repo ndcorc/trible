@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trible/models/todo.dart';
 import 'package:trible/screens/bulletin_screen.dart';
 import 'package:trible/screens/cart_screen.dart';
 import 'package:trible/screens/home/promotion_screen.dart';
@@ -9,9 +7,6 @@ import 'package:trible/screens/search_screen.dart';
 import 'package:trible/screens/settings_screen.dart';
 import 'package:trible/utils/app_bar.dart' as app_bar;
 import 'package:trible/screens/home/home_screen.dart';
-import 'package:trible/utils/app_drawer.dart';
-import 'package:trible/screens/details.dart';
-import 'package:trible/screens/simple_todo.dart';
 import 'package:trible/utils/app_tab_bar.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -28,7 +23,6 @@ final router = GoRouter(
       builder: (BuildContext context, GoRouterState state, Widget child) {
         final currentLocation = GoRouter.of(context).state.fullPath;
         final hide = currentLocation?.startsWith('/promotion') ?? false;
-        print("hideAppBar ${hide}");
         return Scaffold(
           appBar: hide ? null : const app_bar.AppBar(),
           body: child,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:trible/providers/promotions.dart';
+import 'package:trible/widgets/business_image.dart';
 
 class PromotionalCards extends HookConsumerWidget {
   const PromotionalCards({super.key});
@@ -24,7 +25,7 @@ class PromotionalCards extends HookConsumerWidget {
                       child: PromotionalCard(
                         businessName: promotion.business?.name ?? '',
                         title: promotion.title,
-                        imagePath: promotion.business?.imageUrl ?? "",
+                        imagePath: promotion.business?.coverImageUrl ?? "",
                       ),
                     );
                   }).toList(),
@@ -68,19 +69,15 @@ class PromotionalCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            height: 120,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-              ),
-              color: Colors.grey.shade300,
-              image: DecorationImage(
-                image: AssetImage(imagePath),
-                fit: BoxFit.cover,
-                onError: (exception, stackTrace) {},
-              ),
+          ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+            ),
+            child: Container(
+              height: 120,
+              width: double.infinity,
+              child: BusinessImage(imageUrl: imagePath, fit: BoxFit.cover),
             ),
           ),
           Padding(
