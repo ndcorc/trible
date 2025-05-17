@@ -47,6 +47,63 @@ class BusinessesRepository {
     }
   }
 
+  Future<void> saveBusinessList(List<Business> businessList) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+    await prefs.setString(
+      _businessListKey,
+      jsonEncode(businessList.map((business) => business.toJson()).toList()),
+    );
+  }
+
+  Future<Business> addBusiness(Business business) async {
+    final docRef = await _firestore
+        .collection(_collection)
+        .add(business.toJson());
+    return business.copyWith(id: docRef.id);
+  }
+
+  // Update a business
+  Future<void> updateBusiness(Business business) async {
+    await _firestore
+        .collection(_collection)
+        .doc(business.id)
+        .update(business.toJson());
+  }
+
+  // Delete a business
+  Future<void> deleteBusiness(String id) async {
+    await _firestore.collection(_collection).doc(id).delete();
+  }
+
+  // New method: getBusinessById
+  Future<Business> getBusinessById(String id) async {
+    final businessList = await getBusinessList();
+    Business? business = businessList.firstWhereOrNull(
+      (business) => business.id == id,
+    );
+    if (business != null) return business;
+    try {
+      final doc = await _firestore.collection(_collection).doc(id).get();
+      if (!doc.exists) {
+        throw Exception('Business not found for id $id');
+      }
+      final business = Business.fromJson({...doc.data()!, 'id': doc.id});
+      final logoUrl =
+          business.logoUrl.startsWith('gs://')
+              ? await _getDownloadURL(business.logoUrl)
+              : business.logoUrl;
+      final coverImageUrl =
+          business.coverImageUrl.startsWith('gs://')
+              ? await _getDownloadURL(business.coverImageUrl)
+              : business.coverImageUrl;
+      return business.copyWith(logoUrl: logoUrl, coverImageUrl: coverImageUrl);
+    } catch (err) {
+      print('Error fetching business: $err');
+      throw Exception('Failed to load business: $err');
+    }
+  }
+
   // Helper to process business documents with download URLs
   Future<List<Business>> _processBusinessDocs(
     List<QueryDocumentSnapshot> docs,
@@ -92,67 +149,41 @@ class BusinessesRepository {
       return ''; // Return empty string if failed
     }
   }
-
-  Future<void> saveBusinessList(List<Business> businessList) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.clear();
-    await prefs.setString(
-      _businessListKey,
-      jsonEncode(businessList.map((business) => business.toJson()).toList()),
-    );
-  }
-
-  Future<Business> addBusiness(Business business) async {
-    final docRef = await _firestore
-        .collection(_collection)
-        .add(business.toJson());
-    return business.copyWith(id: docRef.id);
-  }
-
-  // Update a business
-  Future<void> updateBusiness(Business business) async {
-    await _firestore
-        .collection(_collection)
-        .doc(business.id)
-        .update(business.toJson());
-  }
-
-  // Delete a business
-  Future<void> deleteBusiness(String id) async {
-    await _firestore.collection(_collection).doc(id).delete();
-  }
-
-  // New method: getBusinessById
-  Future<Business> getBusinessById(String id) async {
-    final businessList = await getBusinessList();
-    Business? business = businessList.firstWhereOrNull(
-      (business) => business.id == id,
-    );
-    if (business != null) {
-      return business;
-    }
-    try {
-      final doc = await _firestore.collection(_collection).doc(id).get();
-
-      if (!doc.exists) {
-        throw Exception('Business not found for id $id');
-      }
-
-      final business = Business.fromJson({...doc.data()!, 'id': doc.id});
-      final logoUrl =
-          business.logoUrl.startsWith('gs://')
-              ? await _getDownloadURL(business.logoUrl)
-              : business.logoUrl;
-
-      final coverImageUrl =
-          business.coverImageUrl.startsWith('gs://')
-              ? await _getDownloadURL(business.coverImageUrl)
-              : business.coverImageUrl;
-
-      return business.copyWith(logoUrl: logoUrl, coverImageUrl: coverImageUrl);
-    } catch (err) {
-      print('Error fetching business: $err');
-      throw Exception('Failed to load business: $err');
-    }
-  }
 }
+
+/* List<Business> defaultBusinesses = [
+  Business(
+    id: '1',
+    name: 'Woodchuck Delivery',
+    tagline: 'The wood is good.',
+    imageUrl: 'assets/images/wood_delivery.png',
+    distance: '1.5 miles',
+    category: 'Services',
+  ),
+  Business(
+    id: '2',
+    name: 'Anthem Botique',
+    tagline: 'Style With A Purpose',
+    imageUrl: 'assets/images/anthem_boutique.png',
+    distance: '0.8 miles',
+    category: 'Shopping',
+  ),
+  Business(
+    id: '3',
+    name: 'Blue Corn Harvest',
+    tagline: 'Authentic Southwestern cuisine',
+    imageUrl: 'assets/images/blue_corn_harvest.png',
+    distance: '2.1 miles',
+    category: 'Food',
+  ),
+  Business(
+    id: '4',
+    name: 'Georgetown Barbershop',
+    tagline: 'Just simple old-fashioned haircuts and shaves!',
+    imageUrl: 'assets/images/georgetown_barbershop.png',
+    distance: '2.1 miles',
+    category: 'Barber',
+  ),
+  // Add more businesses as needed
+];
+ */

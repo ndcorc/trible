@@ -18,36 +18,14 @@ class Promotions extends _$Promotions {
   @override
   Future<List<Promotion>> build() async {
     final promotions = await _fetchPromotions();
-    // Map each promotion to one that includes its business.
-    final promotionsWithBusiness = await Future.wait(
-      promotions.map((promo) async {
-        Business? business;
-        final businessesAsync = ref.read(businessesProvider);
-        if (businessesAsync is AsyncData<List<Business>>) {
-          try {
-            business = businessesAsync.value.firstWhere(
-              (biz) => biz.id == promo.businessId,
-            );
-          } catch (_) {
-            business = null;
-          }
-        }
-        // Fallback to fetching the business from the repo if not found.
-        business ??= await ref
-            .read(businessesRepoProvider)
-            .getBusinessById(promo.businessId);
-
-        return promo.copyWith(business: business);
-      }),
-    );
-
-    // For sortProvider, if you want rebuilds when sort changes then it's fine to keep watch.
     final sort = ref.watch(sortProvider);
     return switch (sort) {
       SortOrder.ASC =>
-        promotionsWithBusiness..sort((a, b) => a.id.compareTo(b.id)),
+        promotions
+          ..sort((a, b) => a.expirationDate.compareTo(b.expirationDate)),
       SortOrder.DESC =>
-        promotionsWithBusiness..sort((a, b) => b.id.compareTo(a.id)),
+        promotions
+          ..sort((a, b) => b.expirationDate.compareTo(a.expirationDate)),
     };
   }
 
@@ -91,7 +69,7 @@ Future<Promotion> promotion(Ref ref, String promotionId) async {
   if (businessesAsync is AsyncData<List<Business>>) {
     try {
       business = businessesAsync.value.firstWhere(
-        (biz) => biz.id == promotion.businessId,
+        (biz) => biz.id == promotion.businessRef?.id,
       );
     } catch (_) {
       business = null;
@@ -101,8 +79,8 @@ Future<Promotion> promotion(Ref ref, String promotionId) async {
   // If the business isn't found in the state, fallback to the repo.
   business ??= await ref
       .watch(businessesRepoProvider)
-      .getBusinessById(promotion.businessId);
+      .getBusinessById(promotion.businessRef?.id ?? "");
 
   // Return a new promotion instance with the business injected.
-  return promotion.copyWith(business: business);
+  return promotion;
 }

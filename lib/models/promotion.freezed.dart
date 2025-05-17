@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Promotion implements DiagnosticableTreeMixin {
 
- String get id; String get businessId; String get title; String? get description; String get category; Business? get business;
+ String get id; String get title; String? get description;@TimestampConverter() Timestamp get expirationDate;@DocumentReferenceConverter() DocumentReference? get businessRef; Business? get business;
 /// Create a copy of Promotion
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,21 +30,21 @@ $PromotionCopyWith<Promotion> get copyWith => _$PromotionCopyWithImpl<Promotion>
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'Promotion'))
-    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('businessId', businessId))..add(DiagnosticsProperty('title', title))..add(DiagnosticsProperty('description', description))..add(DiagnosticsProperty('category', category))..add(DiagnosticsProperty('business', business));
+    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('title', title))..add(DiagnosticsProperty('description', description))..add(DiagnosticsProperty('expirationDate', expirationDate))..add(DiagnosticsProperty('businessRef', businessRef))..add(DiagnosticsProperty('business', business));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Promotion&&(identical(other.id, id) || other.id == id)&&(identical(other.businessId, businessId) || other.businessId == businessId)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.category, category) || other.category == category)&&(identical(other.business, business) || other.business == business));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Promotion&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.expirationDate, expirationDate) || other.expirationDate == expirationDate)&&(identical(other.businessRef, businessRef) || other.businessRef == businessRef)&&(identical(other.business, business) || other.business == business));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,businessId,title,description,category,business);
+int get hashCode => Object.hash(runtimeType,id,title,description,expirationDate,businessRef,business);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'Promotion(id: $id, businessId: $businessId, title: $title, description: $description, category: $category, business: $business)';
+  return 'Promotion(id: $id, title: $title, description: $description, expirationDate: $expirationDate, businessRef: $businessRef, business: $business)';
 }
 
 
@@ -55,7 +55,7 @@ abstract mixin class $PromotionCopyWith<$Res>  {
   factory $PromotionCopyWith(Promotion value, $Res Function(Promotion) _then) = _$PromotionCopyWithImpl;
 @useResult
 $Res call({
- String id, String businessId, String title, String? description, String category, Business? business
+ String id, String title, String? description,@TimestampConverter() Timestamp expirationDate,@DocumentReferenceConverter() DocumentReference? businessRef, Business? business
 });
 
 
@@ -72,14 +72,14 @@ class _$PromotionCopyWithImpl<$Res>
 
 /// Create a copy of Promotion
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? businessId = null,Object? title = null,Object? description = freezed,Object? category = null,Object? business = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? description = freezed,Object? expirationDate = null,Object? businessRef = freezed,Object? business = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,businessId: null == businessId ? _self.businessId : businessId // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String?,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
-as String,business: freezed == business ? _self.business : business // ignore: cast_nullable_to_non_nullable
+as String?,expirationDate: null == expirationDate ? _self.expirationDate : expirationDate // ignore: cast_nullable_to_non_nullable
+as Timestamp,businessRef: freezed == businessRef ? _self.businessRef : businessRef // ignore: cast_nullable_to_non_nullable
+as DocumentReference?,business: freezed == business ? _self.business : business // ignore: cast_nullable_to_non_nullable
 as Business?,
   ));
 }
@@ -103,14 +103,14 @@ $BusinessCopyWith<$Res>? get business {
 @JsonSerializable()
 
 class _Promotion with DiagnosticableTreeMixin implements Promotion {
-   _Promotion({required this.id, required this.businessId, required this.title, this.description, required this.category, this.business});
+   _Promotion({required this.id, required this.title, this.description, @TimestampConverter() required this.expirationDate, @DocumentReferenceConverter() this.businessRef, this.business});
   factory _Promotion.fromJson(Map<String, dynamic> json) => _$PromotionFromJson(json);
 
 @override final  String id;
-@override final  String businessId;
 @override final  String title;
 @override final  String? description;
-@override final  String category;
+@override@TimestampConverter() final  Timestamp expirationDate;
+@override@DocumentReferenceConverter() final  DocumentReference? businessRef;
 @override final  Business? business;
 
 /// Create a copy of Promotion
@@ -127,21 +127,21 @@ Map<String, dynamic> toJson() {
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'Promotion'))
-    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('businessId', businessId))..add(DiagnosticsProperty('title', title))..add(DiagnosticsProperty('description', description))..add(DiagnosticsProperty('category', category))..add(DiagnosticsProperty('business', business));
+    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('title', title))..add(DiagnosticsProperty('description', description))..add(DiagnosticsProperty('expirationDate', expirationDate))..add(DiagnosticsProperty('businessRef', businessRef))..add(DiagnosticsProperty('business', business));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Promotion&&(identical(other.id, id) || other.id == id)&&(identical(other.businessId, businessId) || other.businessId == businessId)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.category, category) || other.category == category)&&(identical(other.business, business) || other.business == business));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Promotion&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.expirationDate, expirationDate) || other.expirationDate == expirationDate)&&(identical(other.businessRef, businessRef) || other.businessRef == businessRef)&&(identical(other.business, business) || other.business == business));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,businessId,title,description,category,business);
+int get hashCode => Object.hash(runtimeType,id,title,description,expirationDate,businessRef,business);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'Promotion(id: $id, businessId: $businessId, title: $title, description: $description, category: $category, business: $business)';
+  return 'Promotion(id: $id, title: $title, description: $description, expirationDate: $expirationDate, businessRef: $businessRef, business: $business)';
 }
 
 
@@ -152,7 +152,7 @@ abstract mixin class _$PromotionCopyWith<$Res> implements $PromotionCopyWith<$Re
   factory _$PromotionCopyWith(_Promotion value, $Res Function(_Promotion) _then) = __$PromotionCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String businessId, String title, String? description, String category, Business? business
+ String id, String title, String? description,@TimestampConverter() Timestamp expirationDate,@DocumentReferenceConverter() DocumentReference? businessRef, Business? business
 });
 
 
@@ -169,14 +169,14 @@ class __$PromotionCopyWithImpl<$Res>
 
 /// Create a copy of Promotion
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? businessId = null,Object? title = null,Object? description = freezed,Object? category = null,Object? business = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? description = freezed,Object? expirationDate = null,Object? businessRef = freezed,Object? business = freezed,}) {
   return _then(_Promotion(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,businessId: null == businessId ? _self.businessId : businessId // ignore: cast_nullable_to_non_nullable
 as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String?,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
-as String,business: freezed == business ? _self.business : business // ignore: cast_nullable_to_non_nullable
+as String?,expirationDate: null == expirationDate ? _self.expirationDate : expirationDate // ignore: cast_nullable_to_non_nullable
+as Timestamp,businessRef: freezed == businessRef ? _self.businessRef : businessRef // ignore: cast_nullable_to_non_nullable
+as DocumentReference?,business: freezed == business ? _self.business : business // ignore: cast_nullable_to_non_nullable
 as Business?,
   ));
 }

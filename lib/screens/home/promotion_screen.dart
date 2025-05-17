@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:trible/models/promotion.dart';
+import 'package:trible/providers/businesses.dart';
 import 'package:trible/providers/promotions.dart';
 
 class PromotionScreen extends HookConsumerWidget {
