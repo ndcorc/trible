@@ -46,14 +46,19 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Icon(Icons.people, color: Color(0xFFF3C154), size: 38),
+                        const Icon(
+                          Icons.people,
+                          color: Color(0xFFF3C154),
+                          size: 38,
+                        ),
                         Text(
                           'Trible',
                           style: GoogleFonts.gabriela(
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                               color: Color(0xFF7BA7B1),
                               fontSize: 32,
                               fontWeight: FontWeight.w600,
+                              height: 1.25,
                             ),
                           ),
                           textAlign: TextAlign.center,
@@ -62,25 +67,6 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
               ),
             ),
-            /* const Row(
-              children: [
-                Icon(Icons.location_on, color: Color(0xFF7BA7B1), size: 15),
-                Text(
-                  'Georgetown',
-                  style: TextStyle(
-                    color: Color(0xFF7BA7B1),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14,
-                  ),
-                ),
-                Icon(
-                  Icons.keyboard_arrow_down,
-                  color: Color(0xFF7BA7B1),
-                  size: 15,
-                ),
-                Text('78626', style: TextStyle(color: Colors.grey, fontSize: 12)),
-              ],
-            ), */
           ],
         ),
       ),

@@ -12,25 +12,26 @@ class PromotionalCards extends HookConsumerWidget {
     final asyncPromotions = ref.watch(promotionsProvider);
 
     return asyncPromotions.when(
-      data:
-          (promotions) => Container(
-            height: 250,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              children:
-                  promotions.map((promotion) {
-                    return GestureDetector(
-                      onTap: () => context.push('/promotion/${promotion.id}'),
-                      child: PromotionalCard(
-                        businessName: promotion.business?.name ?? '',
-                        title: promotion.title,
-                        imagePath: promotion.business?.coverImageUrl ?? "",
-                      ),
-                    );
-                  }).toList(),
-            ),
+      data: (promotions) {
+        return Container(
+          height: 250,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            children:
+                promotions.map((promotion) {
+                  return GestureDetector(
+                    onTap: () => context.push('/promotion/${promotion.id}'),
+                    child: PromotionalCard(
+                      businessName: promotion.business?.name ?? '',
+                      title: promotion.title,
+                      imagePath: promotion.business?.coverImageUrl ?? "",
+                    ),
+                  );
+                }).toList(),
           ),
+        );
+      },
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stackTrace) => Center(child: Text('Error: $error')),
     );
@@ -62,7 +63,7 @@ class PromotionalCard extends StatelessWidget {
             color: Colors.black.withOpacity(0.1),
             spreadRadius: 1,
             blurRadius: 3,
-            offset: Offset(0, 1),
+            offset: const Offset(0, 1),
           ),
         ],
       ),
@@ -74,7 +75,7 @@ class PromotionalCard extends StatelessWidget {
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
             ),
-            child: Container(
+            child: SizedBox(
               height: 120,
               width: double.infinity,
               child: BusinessImage(imageUrl: imagePath, fit: BoxFit.cover),
@@ -87,10 +88,13 @@ class PromotionalCard extends StatelessWidget {
               children: [
                 Text(
                   businessName,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
-                SizedBox(height: 4),
-                Text(title, style: TextStyle(fontSize: 14)),
+                const SizedBox(height: 4),
+                Text(title, style: const TextStyle(fontSize: 14)),
               ],
             ),
           ),

@@ -16,14 +16,20 @@ abstract class Business with _$Business {
     required String coverImageUrl,
     required String checkInInstructions,
     required bool isActive,
-    required BusinessLocation location,
+    required String address,
+    required String city,
+    required String state,
     required int phone,
     required String redeemPolicy,
     required int waitlistInterestScore,
     required String website,
+    @GeoPointConverter() required GeoPoint location,
     @DocumentReferenceConverter() DocumentReference? owner,
     @DocumentReferenceConverter() DocumentReference? category,
     @TimestampConverter() required Timestamp joinedAt,
+    // Keep lat/lon for convenience but make them computed getters
+    @JsonKey(includeFromJson: false, includeToJson: false) double? lat,
+    @JsonKey(includeFromJson: false, includeToJson: false) double? lon,
   }) = _Business;
 
   factory Business.fromJson(Map<String, Object?> json) =>

@@ -54,33 +54,3 @@ class PromotionsRepository {
     );
   }
 }
-
-/* List<Promotion> defaultPromotions = [
-  Promotion(
-    id: '1',
-    businessId: 'wCAFsYl7IIQiUWk0NNJu',
-    title: '15 off wood delivery until 1/1',
-    description:
-        'Now until May 1st, you can use this offer via the Woodchuck Delivery site.\nRedeem to receive the code!',
-    category: 'Services',
-  ),
-  Promotion(
-    id: '2',
-    businessId: 'wCAFsYl7IIQiUWk0NNJu',
-    title: '\$25 off with purchase of \$50 or more',
-    category: 'Shopping',
-  ),
-  Promotion(
-    id: '3',
-    businessId: 'wCAFsYl7IIQiUWk0NNJu',
-    title: 'Kids Under 10 Eat Free, 1/5',
-    category: 'Food',
-  ),
-  Promotion(
-    id: '4',
-    businessId: 'wCAFsYl7IIQiUWk0NNJu',
-    title: '\$10 off haircut and shave',
-    category: 'Barber',
-  ),
-  // Add more promotions as needed
-]; */

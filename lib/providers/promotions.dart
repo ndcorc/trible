@@ -12,7 +12,27 @@ part 'promotions.g.dart';
 @riverpod
 class Promotions extends _$Promotions {
   Future<List<Promotion>> _fetchPromotions() async {
-    return await ref.read(promotionsRepoProvider).getPromotionList();
+    final promotions =
+        await ref.read(promotionsRepoProvider).getPromotionList();
+
+    // Populate the business for each promotion
+    final populatedPromotions = await Future.wait(
+      promotions.map((promotion) async {
+        if (promotion.businessRef == null) return promotion;
+
+        try {
+          final business = await ref
+              .read(businessesRepoProvider)
+              .getBusinessById(promotion.businessRef!.id);
+          return promotion.copyWith(business: business);
+        } catch (e) {
+          print('Error fetching business for promotion ${promotion.id}: $e');
+          return promotion;
+        }
+      }),
+    );
+
+    return populatedPromotions;
   }
 
   @override
@@ -77,10 +97,17 @@ Future<Promotion> promotion(Ref ref, String promotionId) async {
   }
 
   // If the business isn't found in the state, fallback to the repo.
-  business ??= await ref
-      .watch(businessesRepoProvider)
-      .getBusinessById(promotion.businessRef?.id ?? "");
+  if (business == null && promotion.businessRef?.id != null) {
+    try {
+      business = await ref
+          .watch(businessesRepoProvider)
+          .getBusinessById(promotion.businessRef!.id);
+    } catch (e) {
+      print('Error fetching business: $e');
+      business = null;
+    }
+  }
 
   // Return a new promotion instance with the business injected.
-  return promotion;
+  return promotion.copyWith(business: business);
 }

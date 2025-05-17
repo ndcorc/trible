@@ -6,7 +6,7 @@ part of 'promotions.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$promotionHash() => r'75c202f6409450f16e3ce6d1aa0d56dd8520be70';
+String _$promotionHash() => r'174bd5bd164c3ff752693740bc93f0a563e85fb5';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -145,7 +145,7 @@ class _PromotionProviderElement
   String get promotionId => (origin as PromotionProvider).promotionId;
 }
 
-String _$promotionsHash() => r'3ebd2160156e7177dfc6a22615f4869393d0975a';
+String _$promotionsHash() => r'36a75464b8f683cfe0610ad688a797e6a153d45c';
 
 /// See also [Promotions].
 @ProviderFor(Promotions)
