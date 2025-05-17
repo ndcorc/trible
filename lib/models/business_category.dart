@@ -6,11 +6,8 @@ part 'business_category.g.dart';
 
 @freezed
 abstract class BusinessCategory with _$BusinessCategory {
-  factory BusinessCategory({
-    required String title,
-    required String distance,
-    required String imageUrl,
-  }) = _BusinessCategory;
+  factory BusinessCategory({required String name, required String imageUrl}) =
+      _BusinessCategory;
   factory BusinessCategory.fromJson(Map<String, Object?> json) =>
       _$BusinessCategoryFromJson(json);
 }

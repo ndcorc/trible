@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trible/models/business_category.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -14,9 +16,16 @@ final _businessCategoryListKey = 'businessCategoryListKey';
 class BusinessCategoriesRepository {
   BusinessCategoriesRepository();
 
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseStorage _storage = FirebaseStorage.instance;
+  final String _collection = 'businessCategories';
+  final String _imagesPath = 'categories';
+
+  // URL cache to avoid repeated storage calls
+  final Map<String, String> _urlCache = {};
+
   Future<List<BusinessCategory>> getBusinessCategoryList() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
     await prefs.clear();
     try {
       final List<Map<String, dynamic>> businessCategoriesJsonList =
@@ -24,8 +33,13 @@ class BusinessCategoriesRepository {
             jsonDecode(prefs.getString(_businessCategoryListKey) ?? '[]'),
           );
       if (businessCategoriesJsonList.isEmpty) {
-        await saveBusinessCategoryList(defaultBusinessCategories);
-        return defaultBusinessCategories;
+        final snapshot = await _firestore.collection(_collection).get();
+        final businessCategories = await _processBusinessCategoryDocs(
+          snapshot.docs,
+        );
+
+        await saveBusinessCategoryList(businessCategories);
+        return businessCategories;
       }
       return businessCategoriesJsonList
           .map((json) => BusinessCategory.fromJson(json))
@@ -45,9 +59,52 @@ class BusinessCategoriesRepository {
       jsonEncode(businessList.map((business) => business.toJson()).toList()),
     );
   }
+
+  // Helper to process business documents with download URLs
+  Future<List<BusinessCategory>> _processBusinessCategoryDocs(
+    List<QueryDocumentSnapshot> docs,
+  ) async {
+    final businessCategories = <BusinessCategory>[];
+
+    for (final doc in docs) {
+      try {
+        final data = doc.data() as Map<String, dynamic>;
+        data['id'] = doc.id;
+        final businessCategory = BusinessCategory.fromJson(data);
+        final imageUrl = await _getDownloadURL(
+          '$_imagesPath/${businessCategory.imageUrl}',
+        );
+        businessCategories.add(businessCategory.copyWith(imageUrl: imageUrl));
+      } catch (e) {
+        print('Error processing doc ${doc.id}: $e');
+        businessCategories.add(
+          BusinessCategory.fromJson(doc.data() as Map<String, dynamic>),
+        );
+      }
+    }
+
+    return businessCategories;
+  }
+
+  // Get a download URL from a storage path
+  Future<String> _getDownloadURL(String storagePath) async {
+    if (_urlCache.containsKey(storagePath)) {
+      return _urlCache[storagePath]!;
+    }
+
+    try {
+      final ref = _storage.ref(storagePath);
+      final url = await ref.getDownloadURL();
+      _urlCache[storagePath] = url;
+      return url;
+    } catch (e) {
+      print('Error getting download URL: $e');
+      return ''; // Return empty string if failed
+    }
+  }
 }
 
-List<BusinessCategory> defaultBusinessCategories = [
+/* List<BusinessCategory> defaultBusinessCategories = [
   BusinessCategory(
     title: 'Brewery',
     distance: '0.5 Miles',
@@ -94,4 +151,4 @@ List<BusinessCategory> defaultBusinessCategories = [
     imageUrl: 'assets/images/landscaping.png',
   ),
   // Add more businessCategories as needed
-];
+]; */

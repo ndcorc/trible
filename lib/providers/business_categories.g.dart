@@ -7,7 +7,7 @@ part of 'business_categories.dart';
 // **************************************************************************
 
 String _$businessCategoriesHash() =>
-    r'69c734e59643683b499e7476a74753cdc9ee8596';
+    r'ec6f22d9d1d442f67013ef64d93b79296a534234';
 
 /// See also [BusinessCategories].
 @ProviderFor(BusinessCategories)

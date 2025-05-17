@@ -30,9 +30,9 @@ class BusinessCategories extends _$BusinessCategories {
 
     return switch (sort) {
       SortOrder.ASC =>
-        businessCategories..sort((a, b) => a.title.compareTo(b.title)),
+        businessCategories..sort((a, b) => a.name.compareTo(b.name)),
       SortOrder.DESC =>
-        businessCategories..sort((a, b) => b.title.compareTo(a.title)),
+        businessCategories..sort((a, b) => b.name.compareTo(a.name)),
     };
   }
 
@@ -53,7 +53,7 @@ class BusinessCategories extends _$BusinessCategories {
     state = const AsyncValue.loading();
     final newBusinessCategories = [
       for (final businessCategory in state.value!)
-        if (businessCategory.title != categoryTitle) businessCategory,
+        if (businessCategory.name != categoryTitle) businessCategory,
     ];
     state = await AsyncValue.guard(() async {
       await ref

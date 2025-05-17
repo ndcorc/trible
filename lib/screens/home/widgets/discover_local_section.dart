@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:trible/providers/business_categories.dart';
+import 'package:trible/widgets/business_image.dart';
 
 class DiscoverLocalSection extends HookConsumerWidget {
   const DiscoverLocalSection({super.key});
@@ -39,8 +40,8 @@ class DiscoverLocalSection extends HookConsumerWidget {
                     categories
                         .map(
                           (category) => CategoryCard(
-                            title: category.title,
-                            distance: category.distance,
+                            title: category.name,
+                            //distance: category.distance,
                             imagePath: category.imageUrl,
                           ),
                         )
@@ -77,12 +78,12 @@ class CategoryCard extends StatelessWidget {
   const CategoryCard({
     super.key,
     required this.title,
-    required this.distance,
+    //required this.distance,
     required this.imagePath,
   });
 
   final String title;
-  final String distance;
+  //final String distance;
   final String imagePath;
 
   @override
@@ -100,10 +101,18 @@ class CategoryCard extends StatelessWidget {
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                 ),
-                image: DecorationImage(
-                  image: AssetImage(imagePath),
+              ),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+                // Use BusinessImage widget to handle both network and asset images
+                child: BusinessImage(
+                  imageUrl: imagePath,
                   fit: BoxFit.cover,
-                  onError: (exception, stackTrace) {},
+                  width: double.infinity,
+                  height: double.infinity,
                 ),
               ),
             ),
@@ -114,13 +123,16 @@ class CategoryCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
                 ),
-                SizedBox(height: 2),
-                Text(
+                const SizedBox(height: 2),
+                /* Text(
                   distance,
                   style: TextStyle(fontSize: 12, color: Colors.grey),
-                ),
+                ), */
               ],
             ),
           ),

@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$BusinessCategory implements DiagnosticableTreeMixin {
 
- String get title; String get distance; String get imageUrl;
+ String get name; String get imageUrl;
 /// Create a copy of BusinessCategory
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,21 +30,21 @@ $BusinessCategoryCopyWith<BusinessCategory> get copyWith => _$BusinessCategoryCo
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'BusinessCategory'))
-    ..add(DiagnosticsProperty('title', title))..add(DiagnosticsProperty('distance', distance))..add(DiagnosticsProperty('imageUrl', imageUrl));
+    ..add(DiagnosticsProperty('name', name))..add(DiagnosticsProperty('imageUrl', imageUrl));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is BusinessCategory&&(identical(other.title, title) || other.title == title)&&(identical(other.distance, distance) || other.distance == distance)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is BusinessCategory&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,title,distance,imageUrl);
+int get hashCode => Object.hash(runtimeType,name,imageUrl);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'BusinessCategory(title: $title, distance: $distance, imageUrl: $imageUrl)';
+  return 'BusinessCategory(name: $name, imageUrl: $imageUrl)';
 }
 
 
@@ -55,7 +55,7 @@ abstract mixin class $BusinessCategoryCopyWith<$Res>  {
   factory $BusinessCategoryCopyWith(BusinessCategory value, $Res Function(BusinessCategory) _then) = _$BusinessCategoryCopyWithImpl;
 @useResult
 $Res call({
- String title, String distance, String imageUrl
+ String name, String imageUrl
 });
 
 
@@ -72,10 +72,9 @@ class _$BusinessCategoryCopyWithImpl<$Res>
 
 /// Create a copy of BusinessCategory
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? title = null,Object? distance = null,Object? imageUrl = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? imageUrl = null,}) {
   return _then(_self.copyWith(
-title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,distance: null == distance ? _self.distance : distance // ignore: cast_nullable_to_non_nullable
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -88,11 +87,10 @@ as String,
 @JsonSerializable()
 
 class _BusinessCategory with DiagnosticableTreeMixin implements BusinessCategory {
-   _BusinessCategory({required this.title, required this.distance, required this.imageUrl});
+   _BusinessCategory({required this.name, required this.imageUrl});
   factory _BusinessCategory.fromJson(Map<String, dynamic> json) => _$BusinessCategoryFromJson(json);
 
-@override final  String title;
-@override final  String distance;
+@override final  String name;
 @override final  String imageUrl;
 
 /// Create a copy of BusinessCategory
@@ -109,21 +107,21 @@ Map<String, dynamic> toJson() {
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'BusinessCategory'))
-    ..add(DiagnosticsProperty('title', title))..add(DiagnosticsProperty('distance', distance))..add(DiagnosticsProperty('imageUrl', imageUrl));
+    ..add(DiagnosticsProperty('name', name))..add(DiagnosticsProperty('imageUrl', imageUrl));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BusinessCategory&&(identical(other.title, title) || other.title == title)&&(identical(other.distance, distance) || other.distance == distance)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _BusinessCategory&&(identical(other.name, name) || other.name == name)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,title,distance,imageUrl);
+int get hashCode => Object.hash(runtimeType,name,imageUrl);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'BusinessCategory(title: $title, distance: $distance, imageUrl: $imageUrl)';
+  return 'BusinessCategory(name: $name, imageUrl: $imageUrl)';
 }
 
 
@@ -134,7 +132,7 @@ abstract mixin class _$BusinessCategoryCopyWith<$Res> implements $BusinessCatego
   factory _$BusinessCategoryCopyWith(_BusinessCategory value, $Res Function(_BusinessCategory) _then) = __$BusinessCategoryCopyWithImpl;
 @override @useResult
 $Res call({
- String title, String distance, String imageUrl
+ String name, String imageUrl
 });
 
 
@@ -151,10 +149,9 @@ class __$BusinessCategoryCopyWithImpl<$Res>
 
 /// Create a copy of BusinessCategory
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? title = null,Object? distance = null,Object? imageUrl = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? imageUrl = null,}) {
   return _then(_BusinessCategory(
-title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,distance: null == distance ? _self.distance : distance // ignore: cast_nullable_to_non_nullable
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,imageUrl: null == imageUrl ? _self.imageUrl : imageUrl // ignore: cast_nullable_to_non_nullable
 as String,
   ));
