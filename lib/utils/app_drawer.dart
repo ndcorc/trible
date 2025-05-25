@@ -18,7 +18,7 @@ class AppDrawer extends StatelessWidget {
           drawerIconColor: Colors.white,
           title: Text(
             "App Bar",
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w700,
               color: Colors.white,

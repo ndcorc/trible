@@ -1,4 +1,3 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:trible/models/business.dart';
 import 'package:trible/providers/sort.dart';
 import 'package:trible/repositories/businesses.dart';

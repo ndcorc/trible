@@ -41,7 +41,7 @@ class BusinessesRepository {
       }
       return businessesJsonList.map((json) => Business.fromJson(json)).toList();
     } catch (err) {
-      print("err ${err}");
+      print("err $err");
       prefs.clear();
       return [];
     }

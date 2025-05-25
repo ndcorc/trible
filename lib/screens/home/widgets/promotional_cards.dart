@@ -13,7 +13,7 @@ class PromotionalCards extends HookConsumerWidget {
 
     return asyncPromotions.when(
       data: (promotions) {
-        return Container(
+        return SizedBox(
           height: 250,
           child: ListView(
             scrollDirection: Axis.horizontal,

@@ -14,11 +14,10 @@ class Details extends HookConsumerWidget {
     final myController = useTextEditingController();
     final sortCtrl = ref.read(sortProvider.notifier);
 
-    final handleChangeSort =
-        () => {
-          sortCtrl.state =
-              sortCtrl.state == SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC,
-        };
+    handleChangeSort() => {
+      sortCtrl.state =
+          sortCtrl.state == SortOrder.ASC ? SortOrder.DESC : SortOrder.ASC,
+    };
 
     return Scaffold(
       body: Container(

@@ -9,12 +9,12 @@ class BusinessImage extends StatelessWidget {
   final BoxFit fit;
 
   const BusinessImage({
-    Key? key,
+    super.key,
     required this.imageUrl,
     this.width,
     this.height,
     this.fit = BoxFit.cover,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +30,13 @@ class BusinessImage extends StatelessWidget {
         placeholder:
             (context, url) => Container(
               color: Colors.grey[300],
-              child: Center(child: CircularProgressIndicator()),
+              child: const Center(child: CircularProgressIndicator()),
             ),
         errorWidget:
-            (context, url, error) =>
-                Container(color: Colors.grey[300], child: Icon(Icons.error)),
+            (context, url, error) => Container(
+              color: Colors.grey[300],
+              child: const Icon(Icons.error),
+            ),
       );
     } else {
       // Render asset image
@@ -46,7 +48,7 @@ class BusinessImage extends StatelessWidget {
         errorBuilder:
             (context, error, stackTrace) => Container(
               color: Colors.grey[300],
-              child: Icon(Icons.image_not_supported),
+              child: const Icon(Icons.image_not_supported),
             ),
       );
     }

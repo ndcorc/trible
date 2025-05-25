@@ -48,7 +48,7 @@ class DiscoverLocalSection extends HookConsumerWidget {
                         .toList(),
               ),
               const Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(16.0),
                 child: Center(
                   child: Text(
                     'There will be more to explore soon!',
@@ -89,7 +89,7 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(4),
+      margin: const EdgeInsets.all(4),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Column(
         children: [

@@ -38,7 +38,7 @@ class PromotionScreen extends HookConsumerWidget {
                             errorWidget:
                                 (context, url, error) => Container(
                                   color: Colors.grey[300],
-                                  child: Icon(Icons.error),
+                                  child: const Icon(Icons.error),
                                 ),
                           )
                           : Container(color: Colors.grey[300]),
@@ -149,7 +149,7 @@ class PromotionScreen extends HookConsumerWidget {
                                                       null
                                                   ? Text(
                                                     promotion.business?.name
-                                                            ?.substring(0, 1) ??
+                                                            .substring(0, 1) ??
                                                         'B',
                                                   )
                                                   : null,

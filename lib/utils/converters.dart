@@ -64,7 +64,7 @@ class GeoPointConverter implements JsonConverter<GeoPoint, dynamic> {
       );
     }
 
-    return GeoPoint(0, 0);
+    return const GeoPoint(0, 0);
   }
 
   @override

@@ -6,7 +6,7 @@ import 'package:uuid/uuid.dart';
 
 class TodoTile extends HookConsumerWidget {
   final Todo todo;
-  const TodoTile({required this.todo});
+  const TodoTile({super.key, required this.todo});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

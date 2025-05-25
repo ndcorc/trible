@@ -5,10 +5,10 @@ class HideAppBarWrapper extends InheritedWidget {
   final bool hideAppBar;
 
   const HideAppBarWrapper({
-    Key? key,
+    super.key,
     required this.hideAppBar,
-    required Widget child,
-  }) : super(key: key, child: child);
+    required super.child,
+  });
 
   static bool shouldHideAppBar(BuildContext context) {
     final wrapper =

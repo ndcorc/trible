@@ -5,7 +5,7 @@ class CategoryTabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 60,
       child: ListView(
         scrollDirection: Axis.horizontal,
@@ -29,13 +29,13 @@ class CategoryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 4),
+      margin: const EdgeInsets.symmetric(horizontal: 4),
       child: ElevatedButton.icon(
         onPressed: () {},
         icon: Icon(icon, color: Colors.white),
-        label: Text(label, style: TextStyle(color: Colors.white)),
+        label: Text(label, style: const TextStyle(color: Colors.white)),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xFF7BA7B1),
+          backgroundColor: const Color(0xFF7BA7B1),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
