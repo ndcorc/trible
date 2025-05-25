@@ -1,12 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:trible/models/promotion.dart';
 import 'package:trible/providers/businesses.dart';
 import 'package:trible/providers/promotions.dart';
 
-class PromotionScreen extends HookConsumerWidget {
-  const PromotionScreen({super.key, required this.id});
+class PromotionDetailsScreen extends HookConsumerWidget {
+  const PromotionDetailsScreen({super.key, required this.id});
 
   final String id;
 
@@ -19,7 +20,6 @@ class PromotionScreen extends HookConsumerWidget {
           (Promotion promotion) => Scaffold(
             body: Stack(
               children: [
-                // Background image (full height)
                 SizedBox(
                   height: double.infinity,
                   width: double.infinity,
@@ -124,64 +124,73 @@ class PromotionScreen extends HookConsumerWidget {
                                 ),
                                 children: [
                                   // Business section with logo
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0,
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        // Business logo
-                                        CircleAvatar(
-                                          radius: 30,
-                                          backgroundImage:
-                                              promotion.business?.logoUrl !=
-                                                      null
-                                                  ? NetworkImage(
-                                                    promotion
-                                                            .business
-                                                            ?.logoUrl ??
-                                                        "",
-                                                  )
-                                                  : null,
-                                          backgroundColor: Colors.grey[200],
-                                          child:
-                                              promotion.business?.logoUrl ==
-                                                      null
-                                                  ? Text(
-                                                    promotion.business?.name
-                                                            .substring(0, 1) ??
-                                                        'B',
-                                                  )
-                                                  : null,
+                                  GestureDetector(
+                                    onTap:
+                                        () => context.push(
+                                          '/business/${promotion.business?.id ?? ''}',
                                         ),
-                                        const SizedBox(width: 16),
-
-                                        // Business name and tagline
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                promotion.business?.name ??
-                                                    'Business Name',
-                                                style: const TextStyle(
-                                                  fontSize: 24,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              Text(
-                                                promotion.business?.tagline ??
-                                                    'The wood is good.',
-                                                style: TextStyle(
-                                                  color: Colors.grey[600],
-                                                  fontSize: 16,
-                                                ),
-                                              ),
-                                            ],
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          // Business logo
+                                          CircleAvatar(
+                                            radius: 30,
+                                            backgroundImage:
+                                                promotion.business?.logoUrl !=
+                                                        null
+                                                    ? NetworkImage(
+                                                      promotion
+                                                              .business
+                                                              ?.logoUrl ??
+                                                          "",
+                                                    )
+                                                    : null,
+                                            backgroundColor: Colors.grey[200],
+                                            child:
+                                                promotion.business?.logoUrl ==
+                                                        null
+                                                    ? Text(
+                                                      promotion.business?.name
+                                                              .substring(
+                                                                0,
+                                                                1,
+                                                              ) ??
+                                                          'B',
+                                                    )
+                                                    : null,
                                           ),
-                                        ),
-                                      ],
+                                          const SizedBox(width: 16),
+
+                                          // Business name and tagline
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  promotion.business?.name ??
+                                                      'Business Name',
+                                                  style: const TextStyle(
+                                                    fontSize: 24,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  promotion.business?.tagline ??
+                                                      'The wood is good.',
+                                                  style: TextStyle(
+                                                    color: Colors.grey[600],
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
 
