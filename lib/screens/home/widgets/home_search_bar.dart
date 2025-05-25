@@ -14,7 +14,7 @@ class HomeSearchBar extends StatelessWidget {
             flex: 6,
             child: Container(
               decoration: BoxDecoration(
-                color: const Color(0xFFF2F2F2),
+                color: Theme.of(context).colorScheme.surfaceContainer,
                 borderRadius: BorderRadius.circular(18),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -41,7 +41,7 @@ class HomeSearchBar extends StatelessWidget {
             flex: 4,
             child: Container(
               decoration: BoxDecoration(
-                color: const Color(0xFFF2F2F2),
+                color: Theme.of(context).colorScheme.surfaceContainer,
                 borderRadius: BorderRadius.circular(18),
               ),
               padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),

@@ -13,7 +13,7 @@ import 'package:trible/screens/home/home_screen.dart';
 import 'package:trible/widgets/app_tab_bar.dart';
 
 // Define a Riverpod provider for the shared enabled state.
-final enabledProvider = StateProvider<bool>((ref) => true);
+final darkModeProvider = StateProvider<bool>((ref) => false);
 
 // Create a widget that holds the shared state.
 class ShellScaffold extends HookConsumerWidget {
@@ -25,7 +25,7 @@ class ShellScaffold extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final enabled = ref.watch(enabledProvider);
+    final isDarkMode = ref.watch(darkModeProvider);
     final currentLocation = GoRouter.of(context).state.fullPath;
     final hide = hideAppBarRoutes.any(
       (route) => currentLocation?.startsWith(route) ?? false,
@@ -40,13 +40,9 @@ class ShellScaffold extends HookConsumerWidget {
         child: Padding(
           padding: const EdgeInsets.only(bottom: 16),
           child: FloatingActionButton(
-            child: Icon(
-              enabled
-                  ? Icons.hourglass_bottom_rounded
-                  : Icons.hourglass_disabled_outlined,
-            ),
+            child: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
             onPressed: () {
-              ref.read(enabledProvider.notifier).state = !enabled;
+              ref.read(darkModeProvider.notifier).state = !isDarkMode;
             },
           ),
         ),

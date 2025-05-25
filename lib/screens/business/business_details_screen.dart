@@ -88,6 +88,7 @@ class _BusinessDetailContent extends StatelessWidget {
                         height: 120,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
+                          color: Colors.white,
                           border: Border.all(color: Colors.grey.shade300),
                         ),
                         child: ClipOval(
@@ -243,18 +244,18 @@ class _BusinessDetailContent extends StatelessWidget {
                       ),
 
                       // Business Hours
-                      Expanded(
+                      const Expanded(
                         child: Column(
                           children: [
-                            const Text(
+                            Text(
                               'Business Hours',
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.grey,
                               ),
                             ),
-                            const SizedBox(height: 4),
-                            const Text(
+                            SizedBox(height: 4),
+                            Text(
                               'Mon-Sat',
                               style: TextStyle(
                                 fontSize: 20,
@@ -262,8 +263,8 @@ class _BusinessDetailContent extends StatelessWidget {
                                 color: Colors.grey,
                               ),
                             ),
-                            const SizedBox(height: 4),
-                            const Text(
+                            SizedBox(height: 4),
+                            Text(
                               '8am - 6pm',
                               style: TextStyle(
                                 fontSize: 14,
@@ -282,26 +283,26 @@ class _BusinessDetailContent extends StatelessWidget {
                       ),
 
                       // Trible Rank
-                      Expanded(
+                      const Expanded(
                         child: Column(
                           children: [
-                            const Text(
+                            Text(
                               'Trible Rank',
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.grey,
                               ),
                             ),
-                            const SizedBox(height: 4),
-                            const Text(
+                            SizedBox(height: 4),
+                            Text(
                               '#1',
                               style: TextStyle(
                                 fontSize: 28,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            const SizedBox(height: 4),
-                            const Text(
+                            SizedBox(height: 4),
+                            Text(
                               'Home Services',
                               style: TextStyle(
                                 fontSize: 12,
@@ -333,7 +334,10 @@ class _BusinessDetailContent extends StatelessWidget {
                           height: 16,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
+                            color:
+                                Theme.of(
+                                  context,
+                                ).colorScheme.surfaceContainerHighest,
                             borderRadius: BorderRadius.circular(4),
                           ),
                         ),
@@ -342,7 +346,10 @@ class _BusinessDetailContent extends StatelessWidget {
                           height: 16,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
+                            color:
+                                Theme.of(
+                                  context,
+                                ).colorScheme.surfaceContainerHighest,
                             borderRadius: BorderRadius.circular(4),
                           ),
                         ),
@@ -351,7 +358,10 @@ class _BusinessDetailContent extends StatelessWidget {
                           height: 16,
                           width: MediaQuery.of(context).size.width * 0.7,
                           decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
+                            color:
+                                Theme.of(
+                                  context,
+                                ).colorScheme.surfaceContainerHighest,
                             borderRadius: BorderRadius.circular(4),
                           ),
                         ),
@@ -360,7 +370,10 @@ class _BusinessDetailContent extends StatelessWidget {
                           height: 16,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
+                            color:
+                                Theme.of(
+                                  context,
+                                ).colorScheme.surfaceContainerHighest,
                             borderRadius: BorderRadius.circular(4),
                           ),
                         ),
@@ -387,7 +400,10 @@ class _BusinessDetailContent extends StatelessWidget {
                           height: 16,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
+                            color:
+                                Theme.of(
+                                  context,
+                                ).colorScheme.surfaceContainerHighest,
                             borderRadius: BorderRadius.circular(4),
                           ),
                         ),
@@ -396,7 +412,10 @@ class _BusinessDetailContent extends StatelessWidget {
                           height: 16,
                           width: MediaQuery.of(context).size.width * 0.8,
                           decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
+                            color:
+                                Theme.of(
+                                  context,
+                                ).colorScheme.surfaceContainerHighest,
                             borderRadius: BorderRadius.circular(4),
                           ),
                         ),
@@ -405,7 +424,10 @@ class _BusinessDetailContent extends StatelessWidget {
                           height: 16,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
+                            color:
+                                Theme.of(
+                                  context,
+                                ).colorScheme.surfaceContainerHighest,
                             borderRadius: BorderRadius.circular(4),
                           ),
                         ),

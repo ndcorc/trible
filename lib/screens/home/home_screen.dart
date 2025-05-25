@@ -11,8 +11,6 @@ class HomeScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final enabled = ref.watch(enabledProvider); // reference the value here
-
     return const Scaffold(
       body: SafeArea(
         top: false,

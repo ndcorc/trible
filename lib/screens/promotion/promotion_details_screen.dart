@@ -94,9 +94,9 @@ class PromotionDetailsScreen extends HookConsumerWidget {
                   maxChildSize: 0.9, // Maximum height (90% of screen)
                   builder: (context, scrollController) {
                     return Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.vertical(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surfaceContainer,
+                        borderRadius: const BorderRadius.vertical(
                           top: Radius.circular(30),
                         ),
                       ),
@@ -252,7 +252,7 @@ class PromotionDetailsScreen extends HookConsumerWidget {
                 Positioned(
                   left: 16,
                   right: 16,
-                  bottom: 48,
+                  bottom: 56,
                   child: SizedBox(
                     height: 60,
                     child: ElevatedButton(
