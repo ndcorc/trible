@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trible/router/router.dart';
-import 'package:trible/screens/bulletin_screen.dart';
+import 'package:trible/screens/bulletin/bulletin_screen.dart';
 import 'package:trible/screens/business/business_details_screen.dart';
 import 'package:trible/screens/cart_screen.dart';
 import 'package:trible/screens/home/home_screen.dart';
@@ -9,6 +9,7 @@ import 'package:trible/screens/promotion/promotion_details_screen.dart';
 import 'package:trible/screens/search_screen.dart';
 import 'package:trible/screens/settings_screen.dart';
 import 'package:trible/widgets/app_bar.dart' as app_bar;
+import 'package:trible/widgets/bulletin_screen_header.dart';
 
 final routes = <AppRoute>[
   AppRoute(
@@ -50,7 +51,7 @@ final routes = <AppRoute>[
     showSearchBar: true,
     showZipCode: true,
     builder: (context, state) => const BulletinScreen(),
-    extra: Container(color: Colors.blue, height: 70, width: double.infinity),
+    extra: const BulletinScreenHeader(),
   ),
   AppRoute(
     path: '/cart',

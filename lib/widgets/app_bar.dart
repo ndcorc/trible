@@ -41,7 +41,7 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+        padding: const EdgeInsets.fromLTRB(0, 8, 0, 4),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -81,7 +81,8 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ],
             ),
-            AppSearchBar(zipCodeEnabled: appRoute.showZipCode),
+            if (appRoute.showSearchBar)
+              AppSearchBar(zipCodeEnabled: appRoute.showZipCode),
             if (appRoute.extra != null) appRoute.extra!,
           ],
         ),

@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:trible/router/routes.dart';
-import 'package:trible/screens/bulletin_screen.dart';
+import 'package:trible/screens/bulletin/bulletin_screen.dart';
 import 'package:trible/screens/business/business_details_screen.dart';
 import 'package:trible/screens/cart_screen.dart';
 import 'package:trible/screens/promotion/promotion_details_screen.dart';
