@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:trible/router/routes.dart';
 import 'package:trible/screens/bulletin_screen.dart';
 import 'package:trible/screens/business/business_details_screen.dart';
 import 'package:trible/screens/cart_screen.dart';
@@ -11,6 +12,27 @@ import 'package:trible/screens/settings_screen.dart';
 import 'package:trible/widgets/app_bar.dart' as app_bar;
 import 'package:trible/screens/home/home_screen.dart';
 import 'package:trible/widgets/app_tab_bar.dart';
+
+class AppRoute extends GoRoute {
+  final bool showAppBar;
+  final bool showSearchBar;
+  final bool showZipCode;
+  final bool showFavorites;
+
+  AppRoute({
+    required super.path,
+    required super.builder,
+    required super.name,
+    List<AppRoute> routes = const [],
+    this.showAppBar = true,
+    this.showSearchBar = false,
+    this.showZipCode = false,
+    this.showFavorites = false,
+  }) : super(routes: routes);
+}
+
+AppRoute getRoute(String path) =>
+    routes.firstWhere((route) => route.path == path);
 
 // Define a Riverpod provider for the shared enabled state.
 final darkModeProvider = StateProvider<bool>((ref) => false);
@@ -27,12 +49,19 @@ class ShellScaffold extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isDarkMode = ref.watch(darkModeProvider);
     final currentLocation = GoRouter.of(context).state.fullPath;
-    final hide = hideAppBarRoutes.any(
+    final appRoute = getRoute(currentLocation ?? '');
+    final hide = !appRoute.showAppBar;
+    /* final hide = hideAppBarRoutes.any(
       (route) => currentLocation?.startsWith(route) ?? false,
+    ); */
+    final appBarWidget = app_bar.AppBar(
+      searchBarEnabled: appRoute.showSearchBar,
+      zipCodeEnabled: appRoute.showZipCode,
+      favoritesEnabled: appRoute.showFavorites,
     );
 
     return Scaffold(
-      appBar: hide ? null : const app_bar.AppBar(),
+      appBar: hide ? null : appBarWidget,
       body: child,
       bottomNavigationBar: hide ? null : const AppTabBar(),
       floatingActionButton: Padding(

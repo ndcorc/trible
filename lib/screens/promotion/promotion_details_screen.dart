@@ -5,6 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:trible/models/promotion.dart';
 import 'package:trible/providers/businesses.dart';
 import 'package:trible/providers/promotions.dart';
+import 'package:trible/widgets/app_back_button.dart';
+import 'package:trible/widgets/shopping_cart_button.dart';
 
 class PromotionDetailsScreen extends HookConsumerWidget {
   const PromotionDetailsScreen({super.key, required this.id});
@@ -45,43 +47,15 @@ class PromotionDetailsScreen extends HookConsumerWidget {
                 ),
 
                 // Top navigation buttons
-                SafeArea(
+                const SafeArea(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         // Back button
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.arrow_back_ios_new,
-                              color: Colors.black54,
-                            ),
-                            onPressed: () => Navigator.pop(context),
-                          ),
-                        ),
-
-                        // Shopping bag with plus button
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.shopping_bag_outlined,
-                              color: Colors.teal,
-                            ),
-                            onPressed: () {
-                              // Add shopping functionality
-                            },
-                          ),
-                        ),
+                        AppBackButton(),
+                        ShoppingCartButton(),
                       ],
                     ),
                   ),

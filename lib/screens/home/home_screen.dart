@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:trible/router/router.dart';
 import 'package:trible/screens/home/widgets/category_tabs.dart';
 import 'package:trible/screens/home/widgets/discover_local_section.dart';
-import 'package:trible/screens/home/widgets/home_search_bar.dart';
+import 'package:trible/widgets/app_search_bar.dart';
 import 'package:trible/screens/home/widgets/promotional_cards.dart';
 
 class HomeScreen extends HookConsumerWidget {
@@ -19,10 +18,10 @@ class HomeScreen extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Search Bar
-              HomeSearchBar(),
+              /* AppSearchBar(), */
 
               // Category Tabs (Recents, Favorites, etc.)
-              CategoryTabs(),
+              /* CategoryTabs(), */
 
               // Promotional Cards
               PromotionalCards(),

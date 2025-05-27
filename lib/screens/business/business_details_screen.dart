@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:trible/models/business.dart';
 import 'package:trible/providers/businesses.dart';
+import 'package:trible/widgets/app_back_button.dart';
 import 'package:trible/widgets/business_image.dart';
 
 class BusinessDetailScreen extends HookConsumerWidget {
@@ -55,19 +56,10 @@ class _BusinessDetailContent extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                SafeArea(
+                const SafeArea(
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      child: IconButton(
-                        icon: const Icon(
-                          Icons.arrow_back_ios_new,
-                          color: Colors.black54,
-                        ),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                    ),
+                    padding: EdgeInsets.all(16.0),
+                    child: AppBackButton(),
                   ),
                 ),
               ],
