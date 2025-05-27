@@ -18,6 +18,7 @@ class AppRoute extends GoRoute {
   final bool showSearchBar;
   final bool showZipCode;
   final bool showFavorites;
+  final Widget? extra;
 
   AppRoute({
     required super.path,
@@ -28,6 +29,7 @@ class AppRoute extends GoRoute {
     this.showSearchBar = false,
     this.showZipCode = false,
     this.showFavorites = false,
+    this.extra,
   }) : super(routes: routes);
 }
 
@@ -50,15 +52,12 @@ class ShellScaffold extends HookConsumerWidget {
     final isDarkMode = ref.watch(darkModeProvider);
     final currentLocation = GoRouter.of(context).state.fullPath;
     final appRoute = getRoute(currentLocation ?? '');
+    print("appRoute ${appRoute}");
     final hide = !appRoute.showAppBar;
     /* final hide = hideAppBarRoutes.any(
       (route) => currentLocation?.startsWith(route) ?? false,
     ); */
-    final appBarWidget = app_bar.AppBar(
-      searchBarEnabled: appRoute.showSearchBar,
-      zipCodeEnabled: appRoute.showZipCode,
-      favoritesEnabled: appRoute.showFavorites,
-    );
+    final appBarWidget = app_bar.AppBar(appRoute: appRoute);
 
     return Scaffold(
       appBar: hide ? null : appBarWidget,
@@ -102,21 +101,15 @@ final router = GoRouter(
             GoRoute(
               path: 'promotion/:id',
               builder:
-                  (context, state) => app_bar.HideAppBarWrapper(
-                    hideAppBar: true, // Hides the app bar for this child route
-                    child: PromotionDetailsScreen(
-                      id: state.pathParameters['id'] ?? '',
-                    ), // Replace with your actual child widget
+                  (context, state) => PromotionDetailsScreen(
+                    id: state.pathParameters['id'] ?? '',
                   ),
             ),
             GoRoute(
               path: 'business/:id',
               builder:
-                  (context, state) => app_bar.HideAppBarWrapper(
-                    hideAppBar: true,
-                    child: BusinessDetailScreen(
-                      businessId: state.pathParameters['id'] ?? '',
-                    ),
+                  (context, state) => BusinessDetailScreen(
+                    businessId: state.pathParameters['id'] ?? '',
                   ),
             ),
           ],

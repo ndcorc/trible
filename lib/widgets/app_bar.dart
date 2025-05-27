@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:trible/router/router.dart';
 import 'package:trible/screens/home/widgets/category_tabs.dart';
 import 'package:trible/widgets/app_search_bar.dart';
 
@@ -25,21 +26,14 @@ class HideAppBarWrapper extends InheritedWidget {
 }
 
 class AppBar extends StatelessWidget implements PreferredSizeWidget {
-  const AppBar({
-    super.key,
-    this.searchBarEnabled = false,
-    this.zipCodeEnabled = false,
-    this.favoritesEnabled = false,
-  });
+  const AppBar({super.key, required this.appRoute});
 
-  final bool searchBarEnabled;
-  final bool zipCodeEnabled;
-  final bool favoritesEnabled;
+  final AppRoute appRoute;
 
   @override
   Size get preferredSize {
-    double additionalHeight = searchBarEnabled ? 70.0 : 0;
-    additionalHeight += favoritesEnabled ? 70.0 : 0;
+    double additionalHeight = appRoute.showSearchBar ? 70.0 : 0;
+    additionalHeight += appRoute.extra != null ? 70.0 : 0;
     return Size.fromHeight(kToolbarHeight + additionalHeight);
   }
 
@@ -87,8 +81,8 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ],
             ),
-            if (searchBarEnabled) AppSearchBar(zipCodeEnabled: zipCodeEnabled),
-            if (favoritesEnabled) const CategoryTabs(),
+            AppSearchBar(zipCodeEnabled: appRoute.showZipCode),
+            if (appRoute.extra != null) appRoute.extra!,
           ],
         ),
       ),

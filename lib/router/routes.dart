@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:trible/router/router.dart';
 import 'package:trible/screens/bulletin_screen.dart';
 import 'package:trible/screens/business/business_details_screen.dart';
 import 'package:trible/screens/cart_screen.dart';
 import 'package:trible/screens/home/home_screen.dart';
+import 'package:trible/screens/home/widgets/category_tabs.dart';
 import 'package:trible/screens/promotion/promotion_details_screen.dart';
 import 'package:trible/screens/search_screen.dart';
 import 'package:trible/screens/settings_screen.dart';
@@ -17,6 +19,7 @@ final routes = <AppRoute>[
     showZipCode: true,
     showFavorites: true,
     builder: (context, state) => const HomeScreen(),
+    extra: const CategoryTabs(),
   ),
   AppRoute(
     path: '/promotion/:id',
@@ -44,7 +47,10 @@ final routes = <AppRoute>[
     path: '/bulletin',
     name: 'bulletin',
     showAppBar: true,
+    showSearchBar: true,
+    showZipCode: true,
     builder: (context, state) => const BulletinScreen(),
+    extra: Container(color: Colors.blue, height: 70, width: double.infinity),
   ),
   AppRoute(
     path: '/cart',
