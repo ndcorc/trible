@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trible/router/router.dart';
 import 'package:trible/screens/bulletin/bulletin_screen.dart';
 import 'package:trible/screens/business/business_details_screen.dart';
-import 'package:trible/screens/cart_screen.dart';
+import 'package:trible/screens/rewards/cart_screen.dart';
 import 'package:trible/screens/home/home_screen.dart';
 import 'package:trible/screens/home/widgets/category_tabs.dart';
 import 'package:trible/screens/promotion/promotion_details_screen.dart';
