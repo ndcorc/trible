@@ -25,7 +25,8 @@ final routes = <AppRoute>[
   AppRoute(
     path: '/promotion/:id',
     name: 'promotionDetails',
-    showAppBar: false,
+    showAppBar: true,
+    showSearchBar: true,
     builder:
         (context, state) =>
             PromotionDetailsScreen(id: state.pathParameters['id'] ?? ''),

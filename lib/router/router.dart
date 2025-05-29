@@ -52,7 +52,6 @@ class ShellScaffold extends HookConsumerWidget {
     final isDarkMode = ref.watch(darkModeProvider);
     final currentLocation = GoRouter.of(context).state.fullPath;
     final appRoute = getRoute(currentLocation ?? '');
-    print("appRoute ${appRoute}");
     final hide = !appRoute.showAppBar;
     /* final hide = hideAppBarRoutes.any(
       (route) => currentLocation?.startsWith(route) ?? false,

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:trible/router/router.dart';
-import 'package:trible/screens/home/widgets/category_tabs.dart';
+import 'package:trible/widgets/app_back_button.dart';
 import 'package:trible/widgets/app_search_bar.dart';
 
 class HideAppBarWrapper extends InheritedWidget {
@@ -32,60 +33,70 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize {
-    double additionalHeight = appRoute.showSearchBar ? 70.0 : 0;
+    double additionalHeight = 70.0;
+    additionalHeight += appRoute.showSearchBar ? 70.0 : 0;
     additionalHeight += appRoute.extra != null ? 70.0 : 0;
     return Size.fromHeight(kToolbarHeight + additionalHeight);
   }
 
   @override
   Widget build(BuildContext context) {
+    final bool canPop = GoRouter.of(context).canPop();
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 8, 0, 4),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 8, 0, 4),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
-                  height: 36,
-                  child: Image.asset(
-                    'assets/trible_logo.png',
-                    // If you don't have this asset, replace with a placeholder icon or text
-                    errorBuilder:
-                        (context, error, stackTrace) => Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.people,
-                              color: Color(0xFFF3C154),
-                              size: 38,
-                            ),
-                            Text(
-                              'Trible',
-                              style: GoogleFonts.gabriela(
-                                textStyle: const TextStyle(
-                                  color: Color(0xFF7BA7B1),
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.w600,
-                                  height: 1.25,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 36,
+                      child: Image.asset(
+                        'assets/trible_logo.png',
+                        // If you don't have this asset, replace with a placeholder icon or text
+                        errorBuilder:
+                            (context, error, stackTrace) => Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.people,
+                                  color: Color(0xFFF3C154),
+                                  size: 38,
                                 ),
-                              ),
-                              textAlign: TextAlign.center,
+                                Text(
+                                  'Trible',
+                                  style: GoogleFonts.gabriela(
+                                    textStyle: const TextStyle(
+                                      color: Color(0xFF7BA7B1),
+                                      fontSize: 32,
+                                      fontWeight: FontWeight.w600,
+                                      height: 1.25,
+                                    ),
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                  ),
+                      ),
+                    ),
+                  ],
                 ),
+                if (appRoute.showSearchBar)
+                  AppSearchBar(zipCodeEnabled: appRoute.showZipCode),
+                if (appRoute.extra != null) appRoute.extra!,
               ],
             ),
-            if (appRoute.showSearchBar)
-              AppSearchBar(zipCodeEnabled: appRoute.showZipCode),
-            if (appRoute.extra != null) appRoute.extra!,
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: canPop ? const AppBackButton() : const SizedBox(height: 40),
+          ),
+        ],
       ),
     );
   }

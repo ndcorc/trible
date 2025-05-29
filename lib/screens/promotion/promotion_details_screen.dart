@@ -27,21 +27,27 @@ class PromotionDetailsScreen extends HookConsumerWidget {
                   width: double.infinity,
                   child:
                       promotion.business?.coverImageUrl != null
-                          ? CachedNetworkImage(
-                            imageUrl: promotion.business?.coverImageUrl ?? "",
-                            fit: BoxFit.cover,
-                            placeholder:
-                                (context, url) => Container(
-                                  color: Colors.grey[300],
-                                  child: const Center(
-                                    child: CircularProgressIndicator(),
+                          ? ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(30),
+                              topRight: Radius.circular(30),
+                            ),
+                            child: CachedNetworkImage(
+                              imageUrl: promotion.business?.coverImageUrl ?? "",
+                              fit: BoxFit.cover,
+                              placeholder:
+                                  (context, url) => Container(
+                                    color: Colors.grey[300],
+                                    child: const Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
                                   ),
-                                ),
-                            errorWidget:
-                                (context, url, error) => Container(
-                                  color: Colors.grey[300],
-                                  child: const Icon(Icons.error),
-                                ),
+                              errorWidget:
+                                  (context, url, error) => Container(
+                                    color: Colors.grey[300],
+                                    child: const Icon(Icons.error),
+                                  ),
+                            ),
                           )
                           : Container(color: Colors.grey[300]),
                 ),
@@ -49,7 +55,7 @@ class PromotionDetailsScreen extends HookConsumerWidget {
                 // Top navigation buttons
                 const SafeArea(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    padding: EdgeInsets.all(16.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

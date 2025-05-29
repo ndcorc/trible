@@ -20,6 +20,7 @@ class CartScreen extends HookConsumerWidget {
           children: [
             // Header
             const CartHeader(),
+            const SizedBox(height: 16),
 
             // Content
             Expanded(

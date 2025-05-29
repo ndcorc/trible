@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:trible/models/reward.dart';
 import 'package:trible/providers/rewards.dart';
+import 'package:trible/widgets/app_back_button.dart';
 
 class QRScreen extends HookConsumerWidget {
   const QRScreen({super.key, required this.userReward, required this.reward});
@@ -18,15 +20,7 @@ class QRScreen extends HookConsumerWidget {
           child: Column(
             children: [
               // Back button
-              Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back_ios),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                  const Spacer(),
-                ],
-              ),
+              const Row(children: [AppBackButton(), Spacer()]),
 
               const SizedBox(height: 20),
 

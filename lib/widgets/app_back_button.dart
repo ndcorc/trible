@@ -6,6 +6,8 @@ class AppBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 38,
+      width: 38,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
@@ -20,6 +22,7 @@ class AppBackButton extends StatelessWidget {
       ),
       child: IconButton(
         icon: Icon(Icons.arrow_back_ios_new, color: Colors.teal.shade800),
+        iconSize: 20,
         onPressed: () => Navigator.pop(context),
       ),
     );

@@ -71,7 +71,7 @@ class ActiveRewardCard extends HookConsumerWidget {
                       style: TextStyle(
                         color: Colors.green,
                         fontWeight: FontWeight.w400,
-                        fontSize: 22,
+                        fontSize: 20,
                       ),
                     ),
                   ],
@@ -84,7 +84,7 @@ class ActiveRewardCard extends HookConsumerWidget {
                     style: TextStyle(
                       color: Colors.blue,
                       fontWeight: FontWeight.w400,
-                      fontSize: 22,
+                      fontSize: 20,
                     ),
                   ),
                 ),
@@ -96,7 +96,7 @@ class ActiveRewardCard extends HookConsumerWidget {
                   style: TextStyle(
                     color: Colors.blue,
                     fontWeight: FontWeight.w400,
-                    fontSize: 22,
+                    fontSize: 20,
                   ),
                 ),
               ),
