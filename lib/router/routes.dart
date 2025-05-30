@@ -1,16 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:trible/router/router.dart';
 import 'package:trible/screens/bulletin/bulletin_screen.dart';
 import 'package:trible/screens/business/business_details_screen.dart';
+import 'package:trible/screens/explore/explore_screen.dart';
 import 'package:trible/screens/rewards/cart_screen.dart';
 import 'package:trible/screens/home/home_screen.dart';
 import 'package:trible/screens/home/widgets/category_tabs.dart';
 import 'package:trible/screens/promotion/promotion_details_screen.dart';
-import 'package:trible/screens/search_screen.dart';
 import 'package:trible/screens/profile/city_picks_screen.dart';
 import 'package:trible/screens/profile/personal_qr_screen.dart';
 import 'package:trible/screens/profile/profile_screen.dart';
-import 'package:trible/widgets/app_bar.dart' as app_bar;
 import 'package:trible/widgets/bulletin_screen_header.dart';
 
 final routes = <AppRoute>[
@@ -42,10 +40,10 @@ final routes = <AppRoute>[
             BusinessDetailScreen(businessId: state.pathParameters['id'] ?? ''),
   ),
   AppRoute(
-    path: '/search',
-    name: 'search',
-    showAppBar: true,
-    builder: (context, state) => const SearchScreen(),
+    path: '/explore',
+    name: 'explore',
+    showAppBar: false,
+    builder: (context, state) => const ExploreScreen(),
   ),
   AppRoute(
     path: '/bulletin',

@@ -25,7 +25,7 @@ class AppTabBar extends HookConsumerWidget {
             context.go('/');
             break;
           case 1:
-            context.go('/search');
+            context.go('/explore');
             break;
           case 2:
             context.go('/bulletin');
@@ -43,7 +43,7 @@ class AppTabBar extends HookConsumerWidget {
           icon: Padding(padding: EdgeInsets.all(8.0), child: Icon(Icons.home)),
           label: 'Home',
         ),
-        NavigationDestination(icon: Icon(Icons.search), label: 'Search'),
+        NavigationDestination(icon: Icon(Icons.search), label: 'Explore'),
         NavigationDestination(
           icon: Icon(Icons.view_agenda_outlined),
           label: 'Bulletin',

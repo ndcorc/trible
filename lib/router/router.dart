@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:trible/router/routes.dart';
 import 'package:trible/screens/bulletin/bulletin_screen.dart';
 import 'package:trible/screens/business/business_details_screen.dart';
+import 'package:trible/screens/explore/explore_screen.dart';
 import 'package:trible/screens/rewards/cart_screen.dart';
 import 'package:trible/screens/promotion/promotion_details_screen.dart';
-import 'package:trible/screens/search_screen.dart';
 import 'package:trible/screens/profile/city_picks_screen.dart';
 import 'package:trible/screens/profile/personal_qr_screen.dart';
 import 'package:trible/screens/profile/profile_screen.dart';
@@ -100,8 +99,8 @@ final router = GoRouter(
           ],
         ),
         GoRoute(
-          path: '/search',
-          builder: (context, state) => const SearchScreen(),
+          path: '/explore',
+          builder: (context, state) => const ExploreScreen(), // Updated
         ),
         GoRoute(
           path: '/bulletin',
