@@ -79,3 +79,15 @@ ios/Build
 
 # Other
 coverage/
+
+# Generated files
+**/*.g.dart
+**/*.freezed.dart
+
+# Build runner generated files
+*.g.dart
+*.freezed.dart
+
+# Other generated files you might want to ignore
+*.mocks.dart
+*.config.dart
