@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class AppBackButton extends StatelessWidget {
   const AppBackButton({super.key});
@@ -23,7 +24,7 @@ class AppBackButton extends StatelessWidget {
       child: IconButton(
         icon: Icon(Icons.arrow_back_ios_new, color: Colors.teal.shade800),
         iconSize: 20,
-        onPressed: () => Navigator.pop(context),
+        onPressed: () => context.pop(),
       ),
     );
   }

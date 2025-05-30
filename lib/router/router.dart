@@ -8,7 +8,9 @@ import 'package:trible/screens/business/business_details_screen.dart';
 import 'package:trible/screens/rewards/cart_screen.dart';
 import 'package:trible/screens/promotion/promotion_details_screen.dart';
 import 'package:trible/screens/search_screen.dart';
-import 'package:trible/screens/settings_screen.dart';
+import 'package:trible/screens/profile/city_picks_screen.dart';
+import 'package:trible/screens/profile/personal_qr_screen.dart';
+import 'package:trible/screens/profile/profile_screen.dart';
 import 'package:trible/widgets/app_bar.dart' as app_bar;
 import 'package:trible/screens/home/home_screen.dart';
 import 'package:trible/widgets/app_tab_bar.dart';
@@ -49,31 +51,15 @@ class ShellScaffold extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isDarkMode = ref.watch(darkModeProvider);
     final currentLocation = GoRouter.of(context).state.fullPath;
     final appRoute = getRoute(currentLocation ?? '');
     final hide = !appRoute.showAppBar;
-    /* final hide = hideAppBarRoutes.any(
-      (route) => currentLocation?.startsWith(route) ?? false,
-    ); */
     final appBarWidget = app_bar.AppBar(appRoute: appRoute);
 
     return Scaffold(
       appBar: hide ? null : appBarWidget,
       body: child,
       bottomNavigationBar: hide ? null : const AppTabBar(),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 0, right: 4),
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 16),
-          child: FloatingActionButton(
-            child: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
-            onPressed: () {
-              ref.read(darkModeProvider.notifier).state = !isDarkMode;
-            },
-          ),
-        ),
-      ),
     );
   }
 }
@@ -123,8 +109,19 @@ final router = GoRouter(
         ),
         GoRoute(path: '/cart', builder: (context, state) => const CartScreen()),
         GoRoute(
-          path: '/settings',
-          builder: (context, state) => const SettingsScreen(),
+          path: '/profile',
+          builder: (context, state) => const ProfileScreen(),
+        ),
+        GoRoute(
+          path: '/personal-qr',
+          builder: (context, state) => const PersonalQRScreen(),
+        ),
+        GoRoute(
+          path: '/city-picks/:id',
+          builder:
+              (context, state) => CityPicksScreen(
+                cityPicksId: state.pathParameters['id'] ?? '',
+              ),
         ),
       ],
     ),

@@ -17,12 +17,6 @@ class HomeScreen extends HookConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Search Bar
-              /* AppSearchBar(), */
-
-              // Category Tabs (Recents, Favorites, etc.)
-              /* CategoryTabs(), */
-
               // Promotional Cards
               PromotionalCards(),
 

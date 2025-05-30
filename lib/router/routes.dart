@@ -7,7 +7,9 @@ import 'package:trible/screens/home/home_screen.dart';
 import 'package:trible/screens/home/widgets/category_tabs.dart';
 import 'package:trible/screens/promotion/promotion_details_screen.dart';
 import 'package:trible/screens/search_screen.dart';
-import 'package:trible/screens/settings_screen.dart';
+import 'package:trible/screens/profile/city_picks_screen.dart';
+import 'package:trible/screens/profile/personal_qr_screen.dart';
+import 'package:trible/screens/profile/profile_screen.dart';
 import 'package:trible/widgets/app_bar.dart' as app_bar;
 import 'package:trible/widgets/bulletin_screen_header.dart';
 
@@ -61,8 +63,22 @@ final routes = <AppRoute>[
     builder: (context, state) => const CartScreen(),
   ),
   AppRoute(
-    path: '/settings',
-    name: 'settings',
-    builder: (context, state) => const SettingsScreen(),
+    path: '/profile',
+    name: 'profile',
+    builder: (context, state) => const ProfileScreen(),
+  ),
+  AppRoute(
+    path: '/personal-qr',
+    name: 'personalQR',
+    showAppBar: true,
+    builder: (context, state) => const PersonalQRScreen(),
+  ),
+  AppRoute(
+    path: '/city-picks/:id',
+    name: 'cityPicks',
+    showAppBar: true,
+    builder:
+        (context, state) =>
+            CityPicksScreen(cityPicksId: state.pathParameters['id'] ?? ''),
   ),
 ];

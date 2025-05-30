@@ -34,7 +34,7 @@ class AppTabBar extends HookConsumerWidget {
             context.go('/cart');
             break;
           case 4:
-            context.go('/settings');
+            context.go('/profile');
             break;
         }
       },
@@ -49,7 +49,7 @@ class AppTabBar extends HookConsumerWidget {
           label: 'Bulletin',
         ),
         NavigationDestination(icon: Icon(Icons.shopping_cart), label: 'Cart'),
-        NavigationDestination(icon: Icon(Icons.settings), label: 'Settings'),
+        NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
       ],
     );
   }
