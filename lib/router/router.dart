@@ -16,6 +16,8 @@ import 'package:trible/widgets/app_tab_bar.dart';
 
 class AppRoute extends GoRoute {
   final bool showAppBar;
+  final bool showTabBar;
+  final bool hideBackButton;
   final bool showSearchBar;
   final bool showZipCode;
   final bool showFavorites;
@@ -27,6 +29,8 @@ class AppRoute extends GoRoute {
     required super.name,
     List<AppRoute> routes = const [],
     this.showAppBar = true,
+    this.showTabBar = true,
+    this.hideBackButton = false,
     this.showSearchBar = false,
     this.showZipCode = false,
     this.showFavorites = false,
@@ -52,13 +56,12 @@ class ShellScaffold extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentLocation = GoRouter.of(context).state.fullPath;
     final appRoute = getRoute(currentLocation ?? '');
-    final hide = !appRoute.showAppBar;
     final appBarWidget = app_bar.AppBar(appRoute: appRoute);
 
     return Scaffold(
-      appBar: hide ? null : appBarWidget,
+      appBar: !appRoute.showAppBar ? null : appBarWidget,
       body: child,
-      bottomNavigationBar: hide ? null : const AppTabBar(),
+      bottomNavigationBar: !appRoute.showTabBar ? null : const AppTabBar(),
     );
   }
 }

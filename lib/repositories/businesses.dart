@@ -77,7 +77,7 @@ class BusinessesRepository {
   }
 
   // New method: getBusinessById
-  Future<Business> getBusinessById(String id) async {
+  Future<Business?> getBusinessById(String id) async {
     final businessList = await getBusinessList();
     Business? business = businessList.firstWhereOrNull(
       (business) => business.id == id,

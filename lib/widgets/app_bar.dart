@@ -94,7 +94,10 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-            child: canPop ? const AppBackButton() : const SizedBox(height: 40),
+            child:
+                canPop && !appRoute.hideBackButton
+                    ? const AppBackButton()
+                    : const SizedBox(height: 40),
           ),
         ],
       ),

@@ -2,23 +2,53 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:trible/models/todo.dart';
+import 'package:trible/models/business.dart';
 import 'package:trible/providers/sort.dart';
-import 'package:trible/providers/todos.dart';
-import 'package:trible/repositories/todos.dart';
+import 'package:trible/providers/businesses.dart';
+import 'package:trible/repositories/businesses.dart';
 import 'package:uuid/uuid.dart';
 
-class _TodoRepositoryImplDummy implements TodosRepository {
-  List<Todo> inMemoryTodoList = [];
+class _BusinessRepositoryImplDummy implements BusinessesRepository {
+  List<Business> inMemoryBusinessList = [];
 
   @override
-  Future<List<Todo>> getTodoList() async {
-    return inMemoryTodoList;
+  Future<List<Business>> getBusinessList() async {
+    return inMemoryBusinessList;
   }
 
   @override
-  Future<void> saveTodoList(List<Todo> todoList) async {
-    inMemoryTodoList = todoList;
+  Future<void> saveBusinessList(List<Business> businessList) async {
+    inMemoryBusinessList = businessList;
+  }
+
+  @override
+  Future<Business> addBusiness(Business business) async {
+    inMemoryBusinessList.add(business);
+    return business.copyWith(id: const Uuid().v4());
+  }
+
+  @override
+  Future<void> deleteBusiness(String businessId) async {
+    inMemoryBusinessList.removeWhere((business) => business.id == businessId);
+  }
+
+  @override
+  Future<Business?> getBusinessById(String businessId) async {
+    try {
+      return inMemoryBusinessList.firstWhere(
+        (business) => business.id == businessId,
+      );
+    } catch (e) {
+      return null;
+    }
+  }
+
+  @override
+  Future<void> updateBusiness(Business business) async {
+    final index = inMemoryBusinessList.indexWhere((b) => b.id == business.id);
+    if (index != -1) {
+      inMemoryBusinessList[index] = business;
+    }
   }
 }
 
@@ -26,55 +56,55 @@ void main() {
   group('test ViewController behaviors:', () {
     final container = ProviderContainer(
       overrides: [
-        /* todosRepo.overrideWith(
-          Provider.autoDispose<TodosRepository>((ref) => TodosRepository()),
+        /* businessesRepo.overrideWith(
+          Provider.autoDispose<BusinessesRepository>((ref) => BusinessesRepository()),
         ) */
       ],
     );
-    test('initial value of todo list is null', () async {
-      expect(container.read(todosProvider), []);
+    test('initial value of business list is null', () async {
+      expect(container.read(businessesProvider), []);
     });
 
     test('initial load is empty array', () async {
-      await container.read(todosProvider.notifier).build();
-      expect(container.read(todosProvider), []);
+      await container.read(businessesProvider.notifier).build();
+      expect(container.read(businessesProvider), []);
     });
 
-    /* test('add first todo', () async {
-      await container.read(todosProvider.notifier)
-        ..addTodo(Todo(
+    /* test('add first business', () async {
+      await container.read(businessesProvider.notifier)
+        ..addBusiness(Business(
           id: const Uuid().v4(),
-          description: TextEditingController(text: 'first').text,
-          completed: false,
+          name: TextEditingController(text: 'First Business').text,
+          isActive: true,
         ));
-      expect(container.read(todosProvider)![0].description, 'first');
+      expect(container.read(businessesProvider)![0].name, 'First Business');
     }); */
 
-    /* test('add second todo', () async {
-      await container.read(todosProvider.notifier)
-        ..addTodo(Todo(
+    /* test('add second business', () async {
+      await container.read(businessesProvider.notifier)
+        ..addBusiness(Business(
           id: const Uuid().v4(),
-          description: TextEditingController(text: 'second').text,
-          completed: false,
+          name: TextEditingController(text: 'Second Business').text,
+          isActive: true,
         ));
-      expect(container.read(sortedTodosProvider)![1].description, 'second');
+      expect(container.read(sortedBusinessesProvider)![1].name, 'Second Business');
     }); */
 
     /* test('toggle status', () async {
-      final Todo firstTodo = container.read(sortedTodosProvider)![0];
-      await container.read(todosProvider.notifier)
-        ..toggle(firstTodo.id);
-      expect(container.read(sortedTodosProvider)![0].completed, true);
+      final Business firstBusiness = container.read(sortedBusinessesProvider)![0];
+      await container.read(businessesProvider.notifier)
+        ..toggle(firstBusiness.id);
+      expect(container.read(sortedBusinessesProvider)![0].isActive, false);
     }); */
 
     /* test('change sort order', () async {
       container.read(sortProvider.notifier).state = SortOrder.ASC;
-      expect(container.read(sortedTodosProvider)![0].description, 'second');
+      expect(container.read(sortedBusinessesProvider)![0].name, 'Second Business');
     });
 
     test('dispose', () async {
-      container.read(todosProvider.notifier).build();
-      expect(container.read(sortedTodosProvider), []);
+      container.read(businessesProvider.notifier).build();
+      expect(container.read(sortedBusinessesProvider), []);
     }); */
   });
 }

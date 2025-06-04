@@ -15,7 +15,6 @@ final routes = <AppRoute>[
   AppRoute(
     path: '/',
     name: 'home',
-    showAppBar: true,
     showSearchBar: true,
     showZipCode: true,
     showFavorites: true,
@@ -25,8 +24,9 @@ final routes = <AppRoute>[
   AppRoute(
     path: '/promotion/:id',
     name: 'promotionDetails',
-    showAppBar: true,
     showSearchBar: true,
+    showTabBar: false,
+    hideBackButton: true,
     builder:
         (context, state) =>
             PromotionDetailsScreen(id: state.pathParameters['id'] ?? ''),
@@ -35,6 +35,7 @@ final routes = <AppRoute>[
     path: '/business/:id',
     name: 'businessDetails',
     showAppBar: false,
+    showTabBar: false,
     builder:
         (context, state) =>
             BusinessDetailScreen(businessId: state.pathParameters['id'] ?? ''),

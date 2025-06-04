@@ -1,8 +1,12 @@
 // lib/screens/explore/widgets/map_controls.dart
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:trible/screens/explore/widgets/zoom_control.dart';
 
 class MapControls extends StatelessWidget {
-  const MapControls({super.key});
+  const MapControls({super.key, required this.mapController});
+
+  final GoogleMapController? mapController;
 
   @override
   Widget build(BuildContext context) {
@@ -36,27 +40,35 @@ class MapControls extends StatelessWidget {
 
             const Spacer(),
 
-            // Filter Button
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    spreadRadius: 1,
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
+            // Right side controls (Filter and Zoom)
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Filter Button
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        spreadRadius: 1,
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              child: IconButton(
-                icon: const Icon(Icons.tune, color: Color(0xFF7BA7B1)),
-                onPressed: () {
-                  // TODO: Implement filter functionality
-                  _showFilterDialog(context);
-                },
-              ),
+                  child: IconButton(
+                    icon: const Icon(Icons.tune, color: Color(0xFF7BA7B1)),
+                    onPressed: () => _showFilterDialog(context),
+                  ),
+                ),
+
+                const SizedBox(height: 12),
+
+                // Zoom Controls
+                ZoomControls(mapController: mapController),
+              ],
             ),
           ],
         ),

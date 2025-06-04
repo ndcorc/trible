@@ -48,7 +48,7 @@ class ExploreScreen extends HookConsumerWidget {
                 ),
 
                 // Map Controls (Search and Filter buttons)
-                const MapControls(),
+                MapControls(mapController: mapController.value),
 
                 // Bottom Business Card
                 if (selectedBusiness.value != null)

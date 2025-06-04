@@ -5,8 +5,9 @@ class ShoppingCartButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return // Shopping bag with plus button
-    Container(
+    return Container(
+      height: 38,
+      width: 38,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
@@ -21,6 +22,7 @@ class ShoppingCartButton extends StatelessWidget {
       ),
       child: IconButton(
         icon: Icon(Icons.shopping_bag_outlined, color: Colors.teal.shade800),
+        iconSize: 20,
         onPressed: () {
           // Add shopping functionality
         },
