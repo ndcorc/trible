@@ -1,24 +1,60 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+import 'package:trible/models/business.dart';
+import 'package:trible/providers/businesses.dart';
 import 'package:trible/widgets/business_image.dart';
+import 'package:trible/services/analytics_service.dart';
 
 class LocalSpotlightsSection extends HookConsumerWidget {
   const LocalSpotlightsSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16),
-      child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [SizedBox(height: 16), _BusinessOfTheWeekCard()],
+    final asyncBusinesses = ref.watch(businessesProvider);
+    final businesses = asyncBusinesses.asData?.value ?? [];
+    final isLoading = businesses.isEmpty || asyncBusinesses.isLoading;
+    final error = asyncBusinesses.asError;
+
+    if (error != null) {
+      return Center(child: Text('Error: $error'));
+    }
+
+    final business = businesses.isEmpty ? null : (businesses..shuffle()).first;
+
+    return Skeletonizer(
+      enabled: isLoading,
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 16),
+            _BusinessOfTheWeekCard(
+              business: business,
+              businessId: 'business-id', // Mock ID for analytics
+              businessName: 'Business Name', // Mock name for analytics
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
 class _BusinessOfTheWeekCard extends StatelessWidget {
-  const _BusinessOfTheWeekCard();
+  const _BusinessOfTheWeekCard({
+    required this.business,
+    required this.businessId,
+    required this.businessName,
+  });
+  final Business? business;
+
+  // Mock business data for analytics tracking
+  final String? businessId;
+  final String? businessName;
 
   @override
   Widget build(BuildContext context) {
@@ -52,10 +88,10 @@ class _BusinessOfTheWeekCard extends StatelessWidget {
             margin: const EdgeInsets.symmetric(horizontal: 16),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: const BusinessImage(
-                imageUrl: 'assets/images/bakery.png',
-                height: 100,
+              child: BusinessImage(
+                imageUrl: business?.coverImageUrl ?? '',
                 fit: BoxFit.cover,
+                height: 100,
               ),
             ),
           ),
@@ -67,9 +103,9 @@ class _BusinessOfTheWeekCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Text(
-                      "Mary's Southside Bakery",
-                      style: TextStyle(
+                    Text(
+                      business?.name ?? '',
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -118,7 +154,13 @@ class _BusinessOfTheWeekCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          // Track visit business interaction
+                          AnalyticsService.trackVisitBusiness(
+                            businessId: businessId ?? '',
+                            businessName: businessName ?? '',
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF7BA7B1),
                           foregroundColor: Colors.white,
@@ -132,7 +174,13 @@ class _BusinessOfTheWeekCard extends StatelessWidget {
                     const SizedBox(width: 12),
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          // Track add to favorites (City Picks) interaction
+                          AnalyticsService.trackAddToCityPicks(
+                            businessId: businessId ?? '',
+                            businessName: businessName ?? '',
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF7BA7B1),
                           foregroundColor: Colors.white,

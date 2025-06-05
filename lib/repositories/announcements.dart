@@ -33,12 +33,14 @@ class AnnouncementsRepository {
                 .orderBy('priority', descending: true)
                 .orderBy('createdAt', descending: true)
                 .get();
-        final announcements =
+        List<Announcement> announcements =
             snapshot.docs.map((doc) {
               final data = doc.data();
               data['id'] = doc.id;
               return Announcement.fromJson(data);
             }).toList();
+        announcements =
+            announcements.isEmpty ? _getMockAnnouncements() : announcements;
         await saveAnnouncementList(announcements);
         return announcements;
       }

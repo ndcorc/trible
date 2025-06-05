@@ -56,6 +56,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '544256515378',
     projectId: 'trible-bfeaf',
     storageBucket: 'trible-bfeaf.firebasestorage.app',
+    measurementId: 'G-JEJV9VPVVS',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -65,6 +66,7 @@ class DefaultFirebaseOptions {
     projectId: 'trible-bfeaf',
     storageBucket: 'trible-bfeaf.firebasestorage.app',
     iosBundleId: 'com.app.trible',
+    measurementId: 'G-JEJV9VPVVS',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -85,5 +87,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'trible-bfeaf.firebasestorage.app',
     measurementId: 'G-26KT92HMMZ',
   );
-
 }

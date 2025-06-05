@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:trible/models/announcement.dart';
 import 'package:trible/providers/announcements.dart';
+import 'package:trible/services/analytics_service.dart';
 
 class AnnouncementsTab extends HookConsumerWidget {
   const AnnouncementsTab({super.key});
@@ -42,50 +43,59 @@ class _AnnouncementItem extends HookConsumerWidget {
       margin: const EdgeInsets.only(bottom: 16),
       child: Column(
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Megaphone icon
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: const Color(0xFF7BA7B1).withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(8),
+          GestureDetector(
+            onTap: () {
+              // Track announcement tap
+              AnalyticsService.trackAnnouncementTap(
+                announcementId: announcement.id,
+                announcementTitle: announcement.title,
+              );
+            },
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Megaphone icon
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF7BA7B1).withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Icon(
+                    Icons.campaign,
+                    color: Color(0xFF7BA7B1),
+                    size: 20,
+                  ),
                 ),
-                child: const Icon(
-                  Icons.campaign,
-                  color: Color(0xFF7BA7B1),
-                  size: 20,
-                ),
-              ),
-              const SizedBox(width: 16),
+                const SizedBox(width: 16),
 
-              // Announcement details
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      announcement.title,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF7BA7B1),
+                // Announcement details
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        announcement.title,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF7BA7B1),
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      announcement.description,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey.shade600,
+                      const SizedBox(height: 4),
+                      Text(
+                        announcement.description,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey.shade600,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
 
           // Dotted divider

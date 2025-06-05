@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:trible/models/business.dart';
 import 'package:trible/providers/businesses.dart';
+import 'package:trible/services/analytics_service.dart';
 import 'package:trible/widgets/app_back_button.dart';
 import 'package:trible/widgets/business_image.dart';
 
@@ -14,6 +16,22 @@ class BusinessDetailScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncBusinesses = ref.watch(businessesProvider);
+
+    // Track page view when business data is loaded
+    useEffect(() {
+      asyncBusinesses.whenData((businesses) {
+        try {
+          final business = businesses.firstWhere((b) => b.id == businessId);
+          AnalyticsService.trackBusinessPageView(
+            businessId: business.id,
+            businessName: business.name,
+          );
+        } catch (e) {
+          // Business not found, don't track
+        }
+      });
+      return null;
+    }, [asyncBusinesses]);
 
     return asyncBusinesses.when(
       data: (businesses) {

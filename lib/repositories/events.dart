@@ -32,12 +32,13 @@ class EventsRepository {
                 .where('isActive', isEqualTo: true)
                 .orderBy('startTime')
                 .get();
-        final events =
+        List<Event> events =
             snapshot.docs.map((doc) {
               final data = doc.data();
               data['id'] = doc.id;
               return Event.fromJson(data);
             }).toList();
+        events = events.isEmpty ? _getMockEvents() : events;
         await saveEventList(events);
         return events;
       }

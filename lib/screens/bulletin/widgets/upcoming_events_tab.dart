@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:trible/models/event.dart';
 import 'package:trible/providers/events.dart';
+import 'package:trible/services/analytics_service.dart';
 
 class UpcomingEventsTab extends HookConsumerWidget {
   const UpcomingEventsTab({super.key});
@@ -12,34 +14,44 @@ class UpcomingEventsTab extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final savedEvents = useState<Set<String>>({});
     final asyncEvents = ref.watch(eventsProvider);
+    final events = asyncEvents.asData?.value ?? [];
+    final isLoading = events.isEmpty || asyncEvents.isLoading;
+    final error = asyncEvents.asError;
 
-    return asyncEvents.when(
-      data:
-          (events) => Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children:
-                  events.map((event) {
-                    final isSaved = savedEvents.value.contains(event.id);
+    if (error != null) {
+      return Center(child: Text('Error: $error'));
+    }
 
-                    return _EventItem(
-                      event: event,
-                      isSaved: isSaved,
-                      onSaveToggle: () {
-                        final newSaved = Set<String>.from(savedEvents.value);
-                        if (isSaved) {
-                          newSaved.remove(event.id);
-                        } else {
-                          newSaved.add(event.id);
-                        }
-                        savedEvents.value = newSaved;
-                      },
-                    );
-                  }).toList(),
-            ),
-          ),
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, stack) => Center(child: Text('Error: $error')),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Skeletonizer(
+        enabled: isLoading,
+        child: Column(
+          children:
+              events.map((event) {
+                final isSaved = savedEvents.value.contains(event.id);
+
+                return _EventItem(
+                  event: event,
+                  isSaved: isSaved,
+                  onSaveToggle: () {
+                    final newSaved = Set<String>.from(savedEvents.value);
+                    if (isSaved) {
+                      newSaved.remove(event.id);
+                    } else {
+                      newSaved.add(event.id);
+                      // Track save event interaction
+                      AnalyticsService.trackSaveEvent(
+                        eventId: event.id,
+                        eventTitle: event.title,
+                      );
+                    }
+                    savedEvents.value = newSaved;
+                  },
+                );
+              }).toList(),
+        ),
+      ),
     );
   }
 }
@@ -176,7 +188,14 @@ class _EventItem extends HookConsumerWidget {
                     width: 120,
                     height: 32,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // Track get directions interaction
+                        AnalyticsService.trackGetDirections(
+                          eventId: event.id,
+                          eventTitle: event.title,
+                          location: event.location,
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         foregroundColor: const Color(0xFF7BA7B1),

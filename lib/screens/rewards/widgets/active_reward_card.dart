@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:trible/models/reward.dart';
 import 'package:trible/providers/rewards.dart';
 import 'package:trible/screens/rewards/qr_screen.dart';
+import 'package:trible/services/analytics_service.dart';
 
 class ActiveRewardCard extends HookConsumerWidget {
   const ActiveRewardCard({
@@ -108,6 +109,14 @@ class ActiveRewardCard extends HookConsumerWidget {
   }
 
   Future<void> _showQRCode(BuildContext context, WidgetRef ref) async {
+    // Track foot traffic when QR code is shown
+    await AnalyticsService.trackFootTraffic(
+      businessId: _getBusinessId(reward.id),
+      businessName: _getBusinessName(reward.id),
+      rewardId: reward.id,
+      rewardTitle: reward.title,
+    );
+
     // Apply the reward first
     await ref.read(userRewardsProvider.notifier).applyReward(userReward);
 
@@ -149,6 +158,21 @@ class ActiveRewardCard extends HookConsumerWidget {
         return "Good Earth Market";
       default:
         return "Local Business";
+    }
+  }
+
+  String _getBusinessId(String rewardId) {
+    switch (rewardId) {
+      case 'reward1':
+        return "business1";
+      case 'reward2':
+        return "business2";
+      case 'reward3':
+        return "business3";
+      case 'reward4':
+        return "business4";
+      default:
+        return "unknown_business";
     }
   }
 
