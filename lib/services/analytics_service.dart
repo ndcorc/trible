@@ -81,7 +81,7 @@ class AnalyticsService {
     required String eventTitle,
   }) async {
     await trackBulletinInteraction(
-      interactionType: 'save_eventt',
+      interactionType: 'save_event',
       eventId: eventId,
       eventTitle: eventTitle,
     );
